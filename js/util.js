@@ -145,6 +145,7 @@ function getFormattedDate(milliseconds){
     console.log(date.getDate()); 
     sDay = (date.getDate() < 10) ? `0${date.getDate()}` : date.getDate().toString();
     return `${sDay}/${monthName}/${date.getFullYear()}`;
+    
 }
 
 function getIndexFromArray(array, arrayElement){
