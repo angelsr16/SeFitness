@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citas | Entrenador</title>
+    <link rel="shortcut icon" href="../../../assets/images/logotipo.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #424242">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="../../../assets/images/icon.png" alt="" width="100%" height="100%" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="asignar_cita.html">Asignar cita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="citas.html">Consultar cita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../usuarios.html">Regresar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" id="dates_list">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="date" name="" class="form-control mb-3" value="" placeholder="Nombre del usuario">
+                </div>
+                <div class="col-md-3">
+                    <input type="time" name="" class="form-control mb-3" value="" placeholder="Nombre del usuario">
+                </div>
+                <div class="col-md-4">
+                    <button type="button" name="button" class="btn" style="background-color: #2196f3; color: white;">Buscar</button>
+                </div>
+                <div class="col-md-2">
+                  <button type="button" name="button" class="btn my-btn-cancel">Citas retrasadas</button>
+              </div>
+            </div>
+        </div>
+        
+        <div class="my-list">
+
+            <div class="row header-list" style="background-color: #424242;">
+                <h6 class="col-md-3">Nombre</h6>
+                <h6 class="col-md-2">Fecha</h6>
+                <h6 class="col-md-2 ">Hora</h6>
+            </div>
+        
+            <div class="row list-row text-center" id="user_1">
+                <h6 class="col-md-3">Angel de Jesus Sanchez Romero</h6>
+                <h6 class="col-md-2">21/05/2021</h6>
+                <h6 class="col-md-2">10:00 hrs</h6>
+                <h6 class="col pointer" onclick="hideAndShow('#dates_list', '#profile_register')">Registrar avances</h6>  
+                <h6 class="col">Modificar</h6>
+                <h6 class="col text-danger">Eliminar <i class="col bi bi-stopwatch-fill"></i></h6>
+            </div>
+        
+            <div class="row list-row text-center">
+                <h6 class="col-md-3">David Ramirez Sosteno</h6>
+                <h6 class="col-md-2">21/05/2021</h6>
+                <h6 class="col-md-2">17:30 hrs</h6>
+                <h6 class="col pointer">Registrar avances</h6>
+                <h6 class="col pointer">Modificar</h6>
+                <h6 class="col text-danger">Eliminar <i class="col bi bi-stopwatch-fill" style="visibility: hidden;"></i></h6>
+                
+            </div>
+        
+            <div class="row list-row text-center">
+                <h6 class="col-md-3">Getsemani Eliezer Salazar Linares</h6>
+                <h6 class="col-md-2">22/05/2021</h6>
+                <h6 class="col-md-2">10:00 hrs</h6>
+                <h6 class="col pointer">Registrar avances</h6>
+                <h6 class="col">Modificar</h6>
+                <h6 class="col text-danger">Eliminar <i class="col bi bi-stopwatch-fill" style="visibility: hidden;"></i></h6>
+            </div>
+        
+            <div class="row list-row text-center">
+                <h6 class="col-md-3">Hector Alfonso Casas Torres</h6>
+                <h6 class="col-md-2">24/05/2021</h6>
+                <h6 class="col-md-2">20:00 hrs</h6>
+                <h6 class="col pointer">Registrar avances</h6>
+                <h6 class="col">Modificar</h6>
+                <h6 class="col text-danger">Eliminar <i class="col bi bi-stopwatch-fill" style="visibility: hidden;"></i></h6>
+            </div>
+        
+            <div class="row list-row text-center">
+                <h6 class="col-md-3">Alondra Rodriguez Díaz</h6>
+                <h6 class="col-md-2">25/05/2021</h6>
+                <h6 class="col-md-2">12:00 hrs</h6>
+                <h6 class="col pointer">Registrar avances</h6>
+                <h6 class="col">Modificar</h6>
+                <h6 class="col text-danger">Eliminar <i class="col bi bi-stopwatch-fill" style="visibility: hidden;"></i></h6>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="container mt-5" id="profile_register" style="display:none;">
+        <h5 class="text-center">Usuario: Angel de Jesus Sanchez Romero</h5>
+        <div class="d-flex justify-content-center">
+            <div class="profile-register">
+                <form class="row g-3 needs-validation" novalidate style="color:white;">
+
+                    <div class="col-md-12">
+                        <label for="validationCustom01" class="form-label">Tipo de cuerpo</label>
+                        <input type="text" class="form-control" id="validationCustom01" value="Ectomorfo" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="validationCustomUsername" class="form-label">Peso</label>
+                        <div class="input-group has-validation">
+                            <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                            <span class="input-group-text" id="inputGroupPrepend">kg</span>
+                          <div class="invalid-feedback">
+                            Please choose a username.
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="validationCustomUsername" class="form-label">Estatura</label>
+                        <div class="input-group has-validation">
+                            <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                            <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                          <div class="invalid-feedback">
+                            Please choose a username.
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <label for="validationCustom02" class="form-label">I.M.C</label>
+                      <input type="text" class="form-control" id="validationCustom02" value="" required>
+                      <div class="valid-feedback">
+                        Looks good!
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                      <label for="validationCustom04" class="form-label">Objetivos</label>
+                      <textarea class="form-control" id="observations" rows="2"></textarea>
+                      <div class="invalid-feedback">
+                        Please select a valid state.
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                      <label for="validationCustom05" class="form-label">Padecimientos</label>
+                      <textarea class="form-control" id="" rows="2"></textarea>
+                      <div class="invalid-feedback">
+                        Please provide a valid zip.
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <label for="validationCustom05" class="form-label">Observaciones</label>
+                        <textarea class="form-control" id="" rows="2"></textarea>
+                        <div class="invalid-feedback">
+                            Please provide a valid zip.
+                        </div>
+                    </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="row">
+                            <div class="col">
+                                <button type="button" name="button" class="btn my-btn" onclick="hideAndShow('#profile_register', '#dates_list')">Registrar avances</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" name="button" class="btn my-btn-cancel" onclick="hideAndShow('#profile_register', '#dates_list')">Regresar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4"></div>
+                </form>
+            
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="../../../js/util.js"></script>
+</body>
+</html>

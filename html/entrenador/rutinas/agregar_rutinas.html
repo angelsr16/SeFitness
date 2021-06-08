@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar rutina | Entrenador</title>
+    <link rel="shortcut icon" href="../../../assets/images/logotipo.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../css/styles.css">
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #424242">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="../../../assets/images/icon.png" alt="" width="100%" height="100%" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="agregar_rutinas.html">Agregar rutina</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="asignar_rutinas.html">Asignar rutina</a>
+                    </li>
+                    <!--<li class="nav-item">
+                        <a class="nav-link" href="modificar_rutinas.html">Modificar rutina</a>
+                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="rutinas.html">Rutinas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../usuarios.html">Regresar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert" style="display: none;">
+            <strong>Lista de ejercicios vacía</strong> ¡Agrega por lo menos un ejercicio a la rutina!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <div class="row mt-3" id="create_routine_panel">
+            <div class="row">
+                <ol class="options-list-inline" style="margin:0">
+                    <li onclick="hideAndShow('#create_routine_panel', '#create_exercise')"><label>Registrar nuevo ejercicio</label></li>
+                </ol>
+            </div>
+
+            <div class="container col-md-6 border" id="exercises_list">
+                <div class="row header-list mb-3"> <h6>Ejercicios</h6> </div>
+                    <h6 class="text-center">Tipos de ejercicios</h6>
+                    <ol class="filters">
+                        <li> <label for="tipo1">Todos</label> </li>
+                        <li> <label for="tipo2">Aerobicos</label> </li>
+                        <li> <label for="tipo3">Flexibilidad</label> </li>
+                        <li> <label for="tipo4">Fuerza</label> </li>
+                    </ol>
+                
+                <div class="my-list" id="exercises_firebase_list">
+                
+                </div>
+            </div>
+
+            <div class="container col-md-5" id="newRoutine_list">
+                <div class="row header-list mb-3"> <h6>Nueva rutina</h6></div>
+                <form id="routine_form" class="needs-validation">
+                    <input id="form_name" type="text" class="form-control" value="" placeholder="Nombre de la rutina" required>
+                    <div class="invalid-feedback">
+                        Escriba el nombre de la rutina
+                    </div>
+    
+                    <select class="form-control mt-3 mb-3" id="form_type">
+                        <option>Full body</option>
+                        <option>Push/Pull</option>
+                        <option>Upper/Lower</option>
+                        <option>Push/Pull/Legs</option>
+                        <option>Weider</option>
+                    </select>
+                    <div id="new_exercises_list">
+                        
+                    </div>
+                    <div class="d-flex justify-content-center mt-3 login_container">
+                        <button type="button" name="button" class="btn login_btn" id="btnCreateRoutine">Agregar</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+
+        <div class="row mt-3">
+            <div id="edit_exercise" style="display:none;">
+                <div class="d-flex justify-content-center">
+                    <div class="profile-register">
+                        <form class="row g-3 needs-validation" novalidate style="color:white;">
+                            <h5>Ejercicio 1</h5>
+                            <div class="col-md-4">
+                                <label for="validationCustom01" class="form-label">Tipo de ejercicio</label>
+                                <input type="text" class="form-control" id="validationCustom01" value="Tipo de ejercicio 1" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+        
+                            <div class="col-md-4">
+                                <label for="validationCustomUsername" class="form-label">Repeticiones</label>
+                                <div class="input-group has-validation">
+                                    <input value="3" type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                                    
+                                  <div class="invalid-feedback">
+                                    Please choose a username.
+                                  </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-md-4">
+                                <label for="validationCustomUsername" class="form-label">Series</label>
+                                <div class="input-group has-validation">
+                                    <input value="4" type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                                    
+                                  <div class="invalid-feedback">
+                                    Please choose a username.
+                                  </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-md-4">
+                              <label for="validationCustom02" class="form-label">Intensidad</label>
+                              <input type="text" class="form-control" id="validationCustom02" value="Leve" required>
+                              <div class="valid-feedback">
+                                Looks good!
+                              </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="validationCustom02" class="form-label">Categoría</label>
+                                <input type="text" class="form-control" id="validationCustom02" value="Cardiovascular" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+        
+                            <div class="col-12 mt-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <button type="button" name="button" class="btn my-btn" onclick="hideAndShow('#edit_exercise', '#create_routine_panel')">Aceptar</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" name="button" class="btn my-btn-cancel" onclick="hideAndShow('#edit_exercise','#create_routine_panel')">Regresar</button>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-4"></div>
+                        </form>
+                    
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="create_exercise" style="display:none;">
+                <div class="d-flex justify-content-center">
+                    <div class="profile-register">
+                        <form id="exercise_form" class="row g-3 needs-validation" novalidate style="color:white;">
+                            <h5>Nuevo ejercicio</h5>
+                            <div class="col-md-4">
+                                <label class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="form_name_exercise" value="" required>
+                                <div class="invalid-feedback">
+                                    Escribe un nombre
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Tipo de ejercicio</label>
+                                <select class="form-control" id="form_type_exercise">
+                                    <option>Aerobicos</option>
+                                    <option>Fuerza</option>
+                                    <option>Flexibilidad</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Elige el tipo de ejercicio
+                                </div>
+                            </div>
+        
+                            <div class="col-md-4">
+                                <label class="form-label">Repeticiones</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="form_repetitions" aria-describedby="inputGroupPrepend" required>
+                                    
+                                  <div class="invalid-feedback">
+                                    Escribe el número de repeticiones
+                                  </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-md-4">
+                                <label class="form-label">Series</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="form_series" aria-describedby="inputGroupPrepend" required>
+                                    <div class="invalid-feedback">
+                                        Escribe el número de series
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-md-4">
+                              <label class="form-label">Intensidad</label>
+                              <input type="text" class="form-control" id="form_intensity" value="" required>
+                              <div class="invalid-feedback">
+                                Elige la intensidad del ejercicio
+                              </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Categoría</label>
+                                <input type="text" class="form-control" id="form_category" value="" required>
+                                <div class="invalid-feedback">
+                                    Elige la categoría del ejercicio
+                                </div>
+                            </div>
+        
+                            <div class="col-12 mt-3">
+                                <div class="row">
+                                    <div class="col">
+                                        <button id="btnCreateExercise" type="button" name="button" class="btn my-btn">Registrar ejercicio</button>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" name="button" class="btn my-btn-cancel" onclick="hideAndShow('#create_exercise','#create_routine_panel')">Regresar</button>
+                                    </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-4"></div>
+                        </form>
+                    
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="confirmRemoveExerciseModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar rutina</h5>
+                </div>
+                <div class="modal-body">
+                ¿Estás seguro de eliminar este ejercicio?
+                </div>
+                <div class="modal-footer">
+                <button id="btn_cancel_remove" type="button" class="btn btn-secondary" data-dismiss="modal" onclick="showModal('#confirmRemoveExerciseModal', false)">Cancelar</button>
+                <button id="btn_remove_exercise" type="button" class="btn btn-danger" onclick="showModal('#confirmRemoveExerciseModal', false)">Eliminar</button>
+                </div>
+            </div>
+            </div>
+        </div>
+          
+    </div>
+
+    <!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+	<script src="../../../js/firebase_init.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="../../../js/util.js"></script>
+    <script src="../../../js/entrenador/agregar_rutinas.js"></script>
+</body>
+</html>

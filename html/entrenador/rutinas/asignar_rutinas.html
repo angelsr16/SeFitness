@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asignar rutina | Entrenador</title>
+    <link rel="shortcut icon" href="../../../assets/images/logotipo.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../css/styles.css">
+    
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #424242">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="../../../assets/images/icon.png" alt="" width="100%" height="100%" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="agregar_rutinas.html">Agregar rutina</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="asignar_rutinas.html">Asignar rutina</a>
+                    </li>
+                    <!--<li class="nav-item">
+                        <a class="nav-link" href="modificar_rutinas.html">Modificar rutina</a>
+                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="rutinas.html">Rutinas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../usuarios.html">Regresar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5" id="user_list">
+        <div class="row">
+            <div class="col-md-4">
+                <input type="text" name="" class="form-control mb-3" value="" placeholder="Nombre del usuario">
+            </div>
+            <div class="col-md-3">
+                <button type="button" name="button" class="btn" style="background-color: #2196f3; color: white;">Buscar</button>
+            </div>
+        </div>
+
+        <div class="my-list">
+            <div class="row header-list" style="background-color: #424242;">
+                <h6 class="col-md-4">Nombre</h6>
+                <h6 class="col-md-4">Correo</h6>
+                <h6 class="col-md-4">Rutina actual</h6>
+            </div>
+    
+            <div class="row list-row text-center" id="user_1" >
+                <h6 class="col-md-4 pointer" onclick="hideAndShow('#user_list','#routines_list')">Angel de Jesus Sanchez Romero</h6>
+                <h6 class="col-md-4">correo@hotmail.com</h6>
+                <h6 class="col-md-4 pointer" onclick="hideAndShow('#user_list','#routine_info')">Rutina 5 <i class="bi bi-eye-fill"></i></h6>
+            </div>
+    
+            <div class="row list-row text-center">
+                <h6 class="col-md-4">David Ramirez Sosteno</h6>
+                <h6 class="col-md-4">correo@hotmail.com</h6>
+                <h6 class="col-md-4 pointer" onclick="hideAndShow('#user_list','#routine_info')">Rutina 7 <i class="bi bi-eye-fill"></i></h6>
+            </div>
+    
+            <div class="row list-row text-center">
+                <h6 class="col-md-4">Getsemani Eliezer Salazar Linares</h6>
+                <h6 class="col-md-4">correo@hotmail.com</h6>
+                <h6 class="col-md-4 pointer" onclick="hideAndShow('#user_list','#routine_info')">Rutina 3 <i class="bi bi-eye-fill"></i></h6>
+            </div>
+    
+            <div class="row list-row text-center">
+                <h6 class="col-md-4">Hector Alfonso Casas Torres</h6>
+                <h6 class="col-md-4">correo@hotmail.com</h6>
+                <h6 class="col-md-4 text-danger">No asignada</h6>
+            </div>
+    
+            <div class="row list-row text-center">
+                <h6 class="col-md-4">Alondra Rodriguez Díaz</h6>
+                <h6 class="col-md-4">correo@hotmail.com</h6>
+                <h6 class="col-md-4 pointer" onclick="hideAndShow('#user_list','#routine_info')">Rutina 2 <i class="bi bi-eye-fill"></i></h6>
+            </div>
+        </div>
+
+    </div>
+
+    
+    <div class="container mt-5" id="routines_list">
+        <div class="d-flex justify-content-between mb-4">
+            <h4>Usuario: Angel de Jesus Sanchez Romero</h4>
+            <button type="button" name="button" class="btn btn-danger" onclick="hideAndShow('#routines_list','#user_list')">Regresar</button>
+        </div>
+
+        <div class="row header-list mb-3">
+            <h2>Rutinas</h2>
+        </div>
+        <h6 class="text-center">Tipos de rutinas</h6>
+        <ol class="filters">
+            <li> <label for="tipo1">Tipo rutina 1</label> </li>
+            <li> <label for="tipo2">Tipo rutina 2</label> </li>
+            <li> <label for="tipo3">Tipo rutina 3</label> </li>
+            <li> <label for="tipo4">Tipo rutina 4</label> </li>
+        </ol>
+
+        <div class="my-list">
+            <div class="row list-row" id="routine_1">
+                <h6 class="col-md-10 btn-select" id="routine_1_select" onclick="hideAndShow('#routines_list','#observations_form')">Rutina 1 <span class="text-danger">(Tipo de rutina)</span></h6>
+                <div class="col-md-2 btn-select" onclick="showDetails('routine_1_exercises', true)" id="routine_1_exercises_view">Ver</div>
+                <div class="col-md-2 btn-select" onclick="showDetails('routine_1_exercises', false)" id="routine_1_exercises_hide" style="display: none;">Ocultar</div>
+                <div id="routine_1_exercises" style="display:none;">
+                    <div class="row mt-2">
+                        <h6>Ejercicio 1</h6>
+                        <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                        <div class="col"><p class="text-center">Repeticiones</p></div>
+                        <div class="col"><p class="text-center">Series</p></div>
+                        <div class="col"><p class="text-center">Intensidad</p></div>
+                        <div class="col"><p class="text-center">Categoría</p></div>
+                    </div>
+                    <div class="row mt-2">
+                        <h6>Ejercicio 2</h6>
+                        <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                        <div class="col"><p class="text-center">Repeticiones</p></div>
+                        <div class="col"><p class="text-center">Series</p></div>
+                        <div class="col"><p class="text-center">Intensidad</p></div>
+                        <div class="col"><p class="text-center">Categoría</p></div>
+                    </div>
+                    <div class="row mt-2">
+                        <h6>Ejercicio 3</h6>
+                        <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                        <div class="col"><p class="text-center">Repeticiones</p></div>
+                        <div class="col"><p class="text-center">Series</p></div>
+                        <div class="col"><p class="text-center">Intensidad</p></div>
+                        <div class="col"><p class="text-center">Categoría</p></div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row list-row">
+                <h6 class="col-md-10 btn-select" id="routine_2_select">Rutina 2 <span class="text-danger">(Tipo de rutina)</span></h6>
+                <div class="col-md-2 btn-select" onclick="showDetails('routine_2_exercises', true)" id="routine_2_exercises_view">Ver</div>
+                <div class="col-md-2 btn-select" onclick="showDetails('routine_2_exercises', false)" id="routine_2_exercises_hide" style="display: none;">Ocultar</div>
+                <div id="routine_2_exercises" style="display:none;">
+                    <div class="row mt-2">
+                        <h6>Ejercicio 1</h6>
+                        <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                        <div class="col"><p class="text-center">Repeticiones</p></div>
+                        <div class="col"><p class="text-center">Series</p></div>
+                        <div class="col"><p class="text-center">Intensidad</p></div>
+                        <div class="col"><p class="text-center">Categoría</p></div>
+                    </div>
+                    <div class="row mt-2">
+                        <h6>Ejercicio 2</h6>
+                        <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                        <div class="col"><p class="text-center">Repeticiones</p></div>
+                        <div class="col"><p class="text-center">Series</p></div>
+                        <div class="col"><p class="text-center">Intensidad</p></div>
+                        <div class="col"><p class="text-center">Categoría</p></div>
+                    </div>
+                    <div class="row mt-2">
+                        <h6>Ejercicio 3</h6>
+                        <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                        <div class="col"><p class="text-center">Repeticiones</p></div>
+                        <div class="col"><p class="text-center">Series</p></div>
+                        <div class="col"><p class="text-center">Intensidad</p></div>
+                        <div class="col"><p class="text-center">Categoría</p></div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row list-row">
+                <h6 class="col-md-10 btn-select" id="routine_3_select">Rutina 3 <span class="text-danger">(Tipo de rutina)</span></h6>
+                <div class="col-md-2 btn-select" onclick="showDetails('routine_3_exercises', true)" id="routine_3_exercises_view">Ver</div>
+                <div class="col-md-2 btn-select" onclick="showDetails('routine_3_exercises', false)" id="routine_3_exercises_hide" style="display: none;">Ocultar</div>
+                <div id="routine_3_exercises" style="display:none;">
+                    <div class="row mt-2">
+                        <h6>Ejercicio 1</h6>
+                        <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                        <div class="col"><p class="text-center">Repeticiones</p></div>
+                        <div class="col"><p class="text-center">Series</p></div>
+                        <div class="col"><p class="text-center">Intensidad</p></div>
+                        <div class="col"><p class="text-center">Categoría</p></div>
+                    </div>
+                    <div class="row mt-2">
+                        <h6>Ejercicio 2</h6>
+                        <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                        <div class="col"><p class="text-center">Repeticiones</p></div>
+                        <div class="col"><p class="text-center">Series</p></div>
+                        <div class="col"><p class="text-center">Intensidad</p></div>
+                        <div class="col"><p class="text-center">Categoría</p></div>
+                    </div>
+                    <div class="row mt-2">
+                        <h6>Ejercicio 3</h6>
+                        <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                        <div class="col"><p class="text-center">Repeticiones</p></div>
+                        <div class="col"><p class="text-center">Series</p></div>
+                        <div class="col"><p class="text-center">Intensidad</p></div>
+                        <div class="col"><p class="text-center">Categoría</p></div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="row list-row">
+                <h6 class="col-md-10 btn-select" id="routine_4_select">Rutina 4 <span class="text-danger">(Tipo de rutina)</span></h6>
+                <div class="col-md-2 btn-select" onclick="showDetails('routine_4_exercises', true)" id="routine_4_exercises_view">Ver</div>
+                <div class="col-md-2 btn-select" onclick="showDetails('routine_4_exercises', false)" id="routine_4_exercises_hide" style="display: none;">Ocultar</div>
+                <div id="routine_4_exercises" style="display:none;">
+                    <div class="row mt-2">
+                        <h6>Ejercicio 1</h6>
+                        <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                        <div class="col"><p class="text-center">Repeticiones</p></div>
+                        <div class="col"><p class="text-center">Series</p></div>
+                        <div class="col"><p class="text-center">Intensidad</p></div>
+                        <div class="col"><p class="text-center">Categoría</p></div>
+                    </div>
+                    <div class="row mt-2">
+                        <h6>Ejercicio 2</h6>
+                        <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                        <div class="col"><p class="text-center">Repeticiones</p></div>
+                        <div class="col"><p class="text-center">Series</p></div>
+                        <div class="col"><p class="text-center">Intensidad</p></div>
+                        <div class="col"><p class="text-center">Categoría</p></div>
+                    </div>
+                    <div class="row mt-2">
+                        <h6>Ejercicio 3</h6>
+                        <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                        <div class="col"><p class="text-center">Repeticiones</p></div>
+                        <div class="col"><p class="text-center">Series</p></div>
+                        <div class="col"><p class="text-center">Intensidad</p></div>
+                        <div class="col"><p class="text-center">Categoría</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container mt-5 " id="observations_form">
+        <div class="d-flex justify-content-center">
+            <div class="col-md-6 mb-2 border p-3" style="background-color: #2196f3; color:white">
+                <h6 class="mb-2">Usuario: Angel de Jesus Sanchez Romero</h6>
+                <h6 class="mb-3">Nombre de la rutina</h6>
+                <textarea class="form-control" id="observations" rows="3" placeholder="Observaciones"></textarea>
+                
+                <div class="row">
+                    <div class="col-md-2 mt-3">
+                        <button type="button" name="button" class="btn" style="background-color: #424242; color: white;">Asignar</button>
+                    </div>
+                    <div class="col-md-2 mt-3">
+                        <button type="button" name="button" class="btn btn-danger" onclick="hideAndShow('#observations_form','#routines_list')">Regresar</button>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container mt-5" id="routine_info" style="display: none;">
+        <div class="d-flex justify-content-between mb-4">
+            <h5>Usuario: Angel de Jesus Sanchez Romero</h5>
+            <button type="button" name="button" class="btn btn-danger" onclick="hideAndShow('#routine_info','#user_list')">Regresar</button>
+        </div>
+
+        <div class="my-list">
+            <div class="row list-row" id="routine_1_info">
+                <h4 class="col-md-10 btn-select" id="routine_1_select">Rutina 1 <span class="text-danger">(Tipo de rutina)</span></h4>
+                <div class="col-md-2 btn-select" onclick="showDetails('routine_1_info_exercises', true)" id="routine_1_info_exercises_view"><i class="bi bi-eye-fill"></i></div>
+                <div class="col-md-2 btn-select" onclick="showDetails('routine_1_info_exercises', false)" id="routine_1_info_exercises_hide" style="display: none;"><i class="bi bi-eye-slash-fill"></i></div>
+                <div id="routine_1_info_exercises" style="display:none;">
+                    <div class="row mt-2">
+                        <h6>Ejercicio 1 
+                            <span onclick="showDetails('info_exercise_details_1', true)" id="info_exercise_details_1_view" style="font-weight: bolder;" class="pointer">+</span> 
+                            <span onclick="showDetails('info_exercise_details_1', false)" id="info_exercise_details_1_hide" style="display: none; font-weight: bolder;" class="pointer">-</span>
+                        </h6>
+                        <div class="row" id="info_exercise_details_1" style="display: none;">
+                            <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                            <div class="col"><p class="text-center">Repeticiones</p></div>
+                            <div class="col"><p class="text-center">Series</p></div>
+                            <div class="col"><p class="text-center">Intensidad</p></div>
+                            <div class="col"><p class="text-center">Categoría</p></div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <h6>Ejercicio 2
+                            <span onclick="showDetails('info_exercise_details_2', true)" id="info_exercise_details_2_view" style="font-weight: bolder;" class="pointer">+</span> 
+                            <span onclick="showDetails('info_exercise_details_2', false)" id="info_exercise_details_2_hide" style="display: none; font-weight: bolder;" class="pointer">-</span>
+                        </h6>
+                        <div class="row" id="info_exercise_details_2" style="display: none;">
+                            <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                            <div class="col"><p class="text-center">Repeticiones</p></div>
+                            <div class="col"><p class="text-center">Series</p></div>
+                            <div class="col"><p class="text-center">Intensidad</p></div>
+                            <div class="col"><p class="text-center">Categoría</p></div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <h6>Ejercicio 3
+                            <span onclick="showDetails('info_exercise_details_3', true)" id="info_exercise_details_3_view" style="font-weight: bolder;" class="pointer">+</span> 
+                            <span onclick="showDetails('info_exercise_details_3', false)" id="info_exercise_details_3_hide" style="display: none; font-weight: bolder;" class="pointer">-</span>
+                        </h6>
+                        <div class="row" id="info_exercise_details_3" style="display: none;">
+                            <div class="col"><p class="text-center">Tipo de ejercicio</p></div>
+                            <div class="col"><p class="text-center">Repeticiones</p></div>
+                            <div class="col"><p class="text-center">Series</p></div>
+                            <div class="col"><p class="text-center">Intensidad</p></div>
+                            <div class="col"><p class="text-center">Categoría</p></div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <h6>Observaciones
+                            <span onclick="showDetails('info_exercise_details_4', true)" id="info_exercise_details_4_view" style="font-weight: bolder;" class="pointer">+</span> 
+                            <span onclick="showDetails('info_exercise_details_4', false)" id="info_exercise_details_4_hide" style="display: none; font-weight: bolder;" class="pointer">-</span>
+                        </h6>
+                        <div class="row" id="info_exercise_details_4" style="display: none;">
+                            <div class="col"><p class="text-justify">...</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="../../../js/util.js"></script>
+    <script src="../../../js/entrenador/asignar_rutinas.js"></script>
+</body>
+</html>

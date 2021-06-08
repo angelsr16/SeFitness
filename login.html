@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="shortcut icon" href="assets/images/logotipo.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
+    
+</head>
+<body>
+  <div class="container">
+	<div class="alert alert-warning alert-dismissible fade show mt-3" role="alert" style="display: none;">
+		<strong>Usuario no válido</strong> ¡Esta cuenta le pertenece a un cliente!
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
+
+	<div class="d-flex justify-content-center">
+		<div class="user_card">
+			<div class="d-flex justify-content-center">
+				<div class="brand_logo_container">
+					<img src="assets/images/logotipo.png" class="brand_logo" alt="Logo">
+				</div>
+			</div>
+			<div class="justify-content-center form_container">
+				<form id="login_form" class="needs-validation">
+
+					<input id="form_email" type="email" class="form-control" value="" placeholder="Correo electrónico" required>
+					<div class="invalid-feedback">
+						Escriba su correo correctamente
+					</div>
+
+					<input id="form_password" type="password" name="" class="form-control input_pass mt-3" value="" placeholder="Contraseña" required>
+					<div class="invalid-feedback">
+						Escriba su contraseña correctamente
+					</div>
+
+					<div class="d-flex justify-content-center mt-3 login_container">
+						<button type="button" name="button" class="btn login_btn" id="btn_signIn">Entrar</button>
+					</div>
+					<div class="d-flex justify-content-center mt-3 login_container">
+						<a href="recuperar_contraseña.html" class="btn" role="button" aria-pressed="true">¿Perdiste tu contraseña?</a>
+					</div>
+					<div class="d-flex justify-content-center login_container links">
+						<a href="registro.html" class="btn" role="button" aria-pressed="true">¿No tienes una cuenta?</a>
+					</div>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+	<!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+	<script src="js/firebase_init.js"></script>
+
+	<!-- Bootstrap JS -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+	<script
+	src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
+	<script src="js/util.js"></script>
+	<script src="js/login.js"></script>  
+</body>
+</html>

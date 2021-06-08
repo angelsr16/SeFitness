@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citas | Entrenador</title>
+    <link rel="shortcut icon" href="../../../assets/images/logotipo.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="../../../css/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #424242">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="../../../assets/images/icon.png" alt="" width="100%" height="100%" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="asignar_cita.html">Asignar cita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="citas.html">Consultar cita</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../usuarios.html">Regresar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" id="dates_list">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="date" class="form-control mb-3">
+                </div>
+                <div class="col-md-3">
+                    <input type="time" class="form-control mb-3">
+                </div>
+                <div class="col-md-4">
+                    <button type="button" name="button" class="btn" style="background-color: #2196f3; color: white;">Buscar</button>
+                </div>
+                <div class="col-md-2">
+                  <button type="button" name="button" class="btn my-btn-cancel">Citas retrasadas</button>
+              </div>
+            </div>
+        </div>
+        
+        <div class="my-list">
+
+            <div class="row header-list" style="background-color: #424242;">
+                <h6 class="col-md-3">Nombre</h6>
+                <h6 class="col-md-2">Fecha</h6>
+                <h6 class="col-md-2 ">Hora</h6>
+            </div>
+
+            <div class="my-list" id="appointments_firebase_list">
+              <!-- <div class="row list-row text-center" id="user_1">
+                  <h6 class="col-md-3">Angel de Jesus Sanchez Romero</h6>
+                  <h6 class="col-md-2">21/05/2021</h6>
+                  <h6 class="col-md-2">10:00 hrs</h6>
+                  <h6 class="col pointer" onclick="hideAndShow('#dates_list', '#profile_register')">Registrar avances</h6>  
+                  <h6 class="col">Modificar</h6>
+                  <h6 class="col text-danger">Eliminar <i class="col bi bi-stopwatch-fill" style="visibility: hidden;"></i></h6>
+              </div>
+          
+              <div class="row list-row text-center">
+                  <h6 class="col-md-3">David Ramirez Sosteno</h6>
+                  <h6 class="col-md-2">21/05/2021</h6>
+                  <h6 class="col-md-2">17:30 hrs</h6>
+                  <h6 class="col pointer">Registrar avances</h6>
+                  <h6 class="col pointer">Modificar</h6>
+                  <h6 class="col text-danger">Eliminar <i class="col bi bi-stopwatch-fill" style="visibility: hidden;"></i></h6>
+                  
+              </div> -->
+
+            </div>
+        
+        </div>
+    </div>
+
+    
+    <div class="container mt-5" id="profile_register" style="display:none;">
+        <h5 class="text-center" id="selected_user"></h5>
+        <div class="d-flex justify-content-center">
+            <div class="profile-register">
+                <form id="record_progress_form" class="row g-3 needs-validation" novalidate style="color:white;">
+
+                    <div class="col-md-12">
+                        <label class="form-label">Tipo de cuerpo</label>
+                        <input type="text" class="form-control" id="body_type_form" value="Ectomorfo" required>
+                        <div class="invalid-feedback">
+                            Escoge el tipo de cuerpo
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Peso</label>
+                        <div class="input-group has-validation">
+                            <input type="text" class="form-control" id="weight_form" aria-describedby="inputGroupPrepend" required>
+                            <span class="input-group-text" id="inputGroupPrepend">kg</span>
+                          <div class="invalid-feedback">
+                            Escribe el peso del cliente
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Estatura</label>
+                        <div class="input-group has-validation">
+                            <input type="text" class="form-control" id="height_form" aria-describedby="inputGroupPrepend" required>
+                            <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                          <div class="invalid-feedback">
+                            Escribe la estatura del cliente
+                          </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                      <label class="form-label">I.M.C</label>
+                      <input type="text" class="form-control" id="imc_form" value="" required>
+                      <div class="invalid-feedback">
+                        Escribe el I.M.C del cliente
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <label class="form-label">Medidas</label>
+                        <span id="measures_form_view" style="font-weight: bolder; cursor: pointer;" onclick="showDetails('measures_form', true)">+</span>
+                        <span id="measures_form_hide" style="font-weight: bolder; cursor:pointer; display: none;" onclick="showDetails('measures_form', false)">-</span>
+                    </div>
+
+                    <div id="measures_form" class="col-md-12 " style="display:none">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label class="form-label">Cuello</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="neck_measure_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                  <div class="invalid-feedback">
+                                    Escriba las medidas del cliente.
+                                  </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Brazo izquierdo</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="left_arm_measure_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                  <div class="invalid-feedback">
+                                    Escribe la medidas del cliente.
+                                  </div>
+                                </div>
+                            </div>
+        
+                            <div class="col-md-4">
+                                <label class="form-label">Brazo derecho</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="right_arm_measure_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                  <div class="invalid-feedback">
+                                    Escriba las medidas del cliente.
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Antebrazo izquierdo</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="antebrazo_izquierdo_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                    <div class="invalid-feedback">
+                                    Escriba las medidas del cliente.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Antebrazo derecho</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="antebrazo_derecho_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                  <div class="invalid-feedback">
+                                    Escriba las medidas del cliente.
+                                  </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-4">
+                                <label class="form-label">Torácico mesoesternal</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="toracico_mesoesternal_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                  <div class="invalid-feedback">
+                                    Escriba las medidas del cliente.
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Abdominal mínimo</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="abdominal_minimo_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                  <div class="invalid-feedback">
+                                    Escriba las medidas del cliente.
+                                  </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-4">
+                                <label class="form-label">Periumbilical</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="periumbilical_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                  <div class="invalid-feedback">
+                                    Escriba las medidas del cliente.
+                                  </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-4">
+                                <label class="form-label">Glúteo máximo</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="gluteo_maximo_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                  <div class="invalid-feedback">
+                                    Escriba las medidas del cliente.
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Muslo izquierdo</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="muslo_izquierdo_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                  <div class="invalid-feedback">
+                                    Escriba las medidas del cliente.
+                                  </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-4">
+                                <label class="form-label">Muslo derecho</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="muslo_derecho_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                  <div class="invalid-feedback">
+                                    Escriba las medidas del cliente.
+                                  </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4">
+                                <label class="form-label">Pierna máxima izquierda</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="pierna_maxima_izquierda_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                  <div class="invalid-feedback">
+                                    Escriba las medidas del cliente.
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label class="form-label">Pierna máxima derecha</label>
+                                <div class="input-group has-validation">
+                                    <input type="text" class="form-control" id="pierna_maxima_derecha_form" aria-describedby="inputGroupPrepend" required>
+                                    <span class="input-group-text" id="inputGroupPrepend">cm</span>
+                                  <div class="invalid-feedback">
+                                    Escriba las medidas del cliente
+                                  </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-12">
+                      <label class="form-label">Objetivos</label>
+                      <textarea class="form-control" id="objetivos_form" rows="2"></textarea>
+                      <div class="invalid-feedback">
+                        
+                      </div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                      <label class="form-label">Padecimientos</label>
+                      <textarea class="form-control" id="padecimientos_form" rows="2"></textarea>
+                      <div class="invalid-feedback">
+                        
+                      </div>
+                    </div>
+
+                    <div class="col-md-12">
+                      <label class="form-label">Observaciones</label>
+                      <textarea class="form-control" id="observaciones_form" rows="2" required></textarea>
+                      <div class="invalid-feedback">
+                          Escriba las observaciones del cliente
+                      </div>
+                  </div>
+
+                    <div class="col-12 mt-3">
+                        <div class="row">
+                            <div class="col">
+                                <button id="record_btn" type="button" name="button" class="btn my-btn">Registrar avances</button>
+                            </div>
+                            <div class="col">
+                              <button type="button" name="button" class="btn my-btn" onclick="hideAndShow('#profile_register', '#dates_list')">Asignar nueva rutina</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" name="button" class="btn my-btn-cancel" onclick="hideAndShow('#profile_register', '#dates_list')">Regresar</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4"></div>
+                </form>
+            
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+	<script src="../../../js/firebase_init.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="../../../js/util.js"></script>
+    <script src="../../../js/entrenador/citas.js"></script>
+</body>
+</html>

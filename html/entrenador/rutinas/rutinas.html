@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rutinas | Entrenador</title>
+    <link rel="shortcut icon" href="../../../assets/images/logotipo.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="../../../css/styles.css">
+    
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #424242">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="../../../assets/images/icon.png" alt="" width="100%" height="100%" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="agregar_rutinas.html">Agregar rutina</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="asignar_rutinas.html">Asignar rutina</a>
+                    </li>
+                    <!--<li class="nav-item">
+                        <a class="nav-link" href="modificar_rutinas.html">Modificar rutina</a>
+                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link active" href="rutinas.html">Rutinas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../usuarios.html">Regresar</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5" id="routines_list">
+        <div id="alerts_panel">
+
+        </div>
+        <div class="row header-list mb-3">
+            <h2>Rutinas</h2>
+        </div>
+        <h6 class="text-center">Tipos de rutinas</h6>
+        <ol class="filters">
+            <li> <label for="tipo1">Todos</label> </li>
+            <li> <label for="tipo2">Full body</label> </li>
+            <li> <label for="tipo3">Push/Pull</label> </li>
+            <li> <label for="tipo4">Upper/Lower</label> </li>
+            <li> <label for="tipo5">Push/Pull/Legs</label> </li>
+            <li> <label for="tipo6">Weider</label> </li>
+            
+        </ol>
+
+        <div class="my-list" id="routines_firebase_list">
+            
+        </div>
+
+    </div>
+
+    <div class="container" id="edit_routine" style="display:none;">
+        <div class="row mt-3">
+            <div class="row">
+                <ol class="options-list-inline" style="margin:0">
+                    <li><label>Registrar nuevo ejercicio</label></li>
+                </ol>
+            </div>
+            <div class="container col-md-6 border" id="exercises_list">
+                <div class="row header-list mb-3"> <h6>Ejercicios</h6> </div>
+                    <h6 class="text-center">Tipos de ejercicios</h6>
+                    <ol class="filters">
+                        <li> <label for="tipo1">Tipo ejercicio 1</label> </li>
+                        <li> <label for="tipo2">Tipo 2</label> </li>
+                        <li> <label for="tipo3">Tipo 3</label> </li>
+                        <li> <label for="tipo4">Tipo 4</label> </li>
+                    </ol>
+                
+                <div class="my-list">
+                    <div class="row list-row" id="exercise_1">
+                        <h6 class="col-md-8 btn-select" id="exercise_1_select" onclick="addExercise();">Ejercicio 1 <span class="text-danger">(Tipo de ejercicio)</span></h6>
+                        
+                        <div class="col-md-1 btn-select">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                              </svg>
+                        </div>
+                        <div class="col-md-1 btn-select">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+                            </svg>
+                        </div>
+                        <div class="col-md-1 btn-select" onclick="showDetails('exercise_1_details', true)" id="exercise_1_details_view">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                            </svg>
+                        </div>
+                        <div class="col btn-select" onclick="showDetails('exercise_1_details', false)" id="exercise_1_details_hide" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                                <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                                <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                              </svg>
+                        </div>
+                        <div id="exercise_1_details" style="display:none;">
+                            <div class="row mt-2">
+                                <div><p>Tipo de ejercicio: </p></div>
+                                <div><p>Repeticiones: </p></div>
+                                <div><p>Series: </p></div>
+                                <div><p>Intensidad:</p></div>
+                                <div><p>Categoría: </p></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row list-row" id="exercise_2">
+                        <h6 class="col-md-8 btn-select" id="exercise_2_select" onclick="addExercise();">Ejercicio 2 <span class="text-danger">(Tipo de ejercicio)</span></h6>
+                        <div class="col-md-1 btn-select">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                              </svg>
+                        </div>
+                        <div class="col-md-1 btn-select">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+                            </svg>
+                        </div>
+                        <div class="col-md-1 btn-select" onclick="showDetails('exercise_2_details', true)" id="exercise_2_details_view">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                            </svg>
+                        </div>
+                        <div class="col btn-select" onclick="showDetails('exercise_2_details', false)" id="exercise_2_details_hide" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                                <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                                <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                              </svg>
+                        </div><div id="exercise_2_details" style="display:none;">
+                            <div class="row mt-2">
+                                <div><p>Tipo de ejercicio: </p></div>
+                                <div><p>Repeticiones: </p></div>
+                                <div><p>Series: </p></div>
+                                <div><p>Intensidad:</p></div>
+                                <div><p>Categoría: </p></div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <div class="row list-row" id="exercise_3">
+                        <h6 class="col-md-8 btn-select" id="exercise_3_select" onclick="addExercise();">Ejercicio 3 <span class="">(Tipo de ejercicio)</span></h6>
+                        <div class="col-md-1 btn-select">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                              </svg>
+                        </div>
+                        <div class="col-md-1 btn-select">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+                            </svg>
+                        </div>
+                        <div class="col-md-1 btn-select" onclick="showDetails('exercise_3_details', true)" id="exercise_3_details_view">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"/>
+                            </svg>
+                        </div>
+                        <div class="col btn-select" onclick="showDetails('exercise_3_details', false)" id="exercise_3_details_hide" style="display: none;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-eye-slash" viewBox="0 0 16 16">
+                                <path d="M13.359 11.238C15.06 9.72 16 8 16 8s-3-5.5-8-5.5a7.028 7.028 0 0 0-2.79.588l.77.771A5.944 5.944 0 0 1 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.134 13.134 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755-.165.165-.337.328-.517.486l.708.709z"/>
+                                <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z"/>
+                                <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z"/>
+                              </svg>
+                        </div><div id="exercise_3_details" style="display:none;">
+                            <div class="row mt-2">
+                                <div><p>Tipo de ejercicio: </p></div>
+                                <div><p>Repeticiones: </p></div>
+                                <div><p>Series: </p></div>
+                                <div><p>Intensidad:</p></div>
+                                <div><p>Categoría: </p></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container col-md-5" id="newRoutine_list">
+                <div class="row header-list mb-3"> <h6>Editar rutina</h6></div>
+                <input type="text" name="" class="form-control input_user mb-3" value="Rutina 1 (Tipo de rutina)" placeholder="Nombre de la rutina">
+                <select class="form-control mb-3" id="genero">
+                    <option>Tipo rutina 1</option>
+                    <option>Tipo rutina 2</option>
+                </select>
+
+                <div id="new_exercises_list">
+                    <div class="row list-row" id="new_exercise_1">
+                        <h6 class="col-md-10 btn-select" id="exercise_1_select">Ejercicio 1 <span class="text-danger">(Tipo de ejercicio)</span></h6>
+                        <div class="col-md-2 btn-select" onclick="removeComponent('new_exercise_1')" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-square-fill" viewBox="0 0 16 16">
+                                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm3.354 4.646L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center mt-3 login_container">
+                    <button type="button" name="button" class="btn login_btn" onclick="hideAndShow('#edit_routine', '#routines_list')">Guardar</button>
+                </div>
+            </div>
+
+
+            
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Eliminar rutina</h5>
+            </div>
+            <div class="modal-body">
+            ¿Estás seguro de eliminar esta rutina?
+            </div>
+            <div class="modal-footer">
+            <button id="btn_cancel_remove" type="button" class="btn btn-secondary" data-dismiss="modal" onclick="showModal('#exampleModal', false)">Cancelar</button>
+            <button id="btn_remove_routine" type="button" class="btn btn-danger" onclick="showModal('#exampleModal', false)">Eliminar</button>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+	<script src="../../../js/firebase_init.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+    <script src="../../../js/util.js"></script>
+    <!--<script src="../../../js/entrenador/agregar_rutinas.js"></script>-->
+    <script src="../../../js/entrenador/rutinas.js"></script>
+</body>
+</html>

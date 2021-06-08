@@ -1,0 +1,215 @@
+/* General */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+a:link, a:visited, a:hover, a:active {
+    color: white;
+    text-decoration: none;
+    font-weight: bolder;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+.login_btn {
+    width: 100%;
+    background: #424242 !important;
+    color: white !important;
+    margin-right: 2.5em;
+    margin-left: 2.5em;
+}
+
+.my-btn {
+    background-color: #424242;
+    color:white;
+}
+
+.my-btn-cancel {
+    background-color: #d9534f;
+    color:white;
+}
+
+p {
+    margin: 0;
+}
+
+/* Formularios */
+
+.user_card {
+    height: auto;
+    width: 350px;
+    margin-top: 8rem;
+    margin-bottom: auto;
+    padding-top: 2.5em;
+    padding-bottom: 2em;
+    background: #2196f3;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+
+}
+.brand_logo_container {
+    position: absolute;
+    height: 170px;
+    width: 170px;
+    top: -75px;
+    border-radius: 50%;
+    background: white;
+    padding: 25px;
+    text-align: center;
+}
+.brand_logo {
+    width: 100px;
+}
+
+.form_container {
+    margin-top: 75px;
+    margin-left: 2.5em;
+    margin-right: 2.5em;
+}
+
+
+.step-btn {
+    margin-left: 1em;
+    margin-right: 1em;
+    background: #424242 !important;
+    color: white !important;
+}
+
+/* Registro perfil */
+.profile-register {
+    padding: 2em 2em 2em 2em;
+    width: 65%;
+    background-color: #2196f3;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+}
+
+/* Listas */
+.my-list {
+    margin: 0 auto;
+}
+
+.header-list{
+    line-height: 24pt;
+    padding: 1em 0 1em 0;
+    text-align: center;
+    background-color: #424242;
+    color: white;
+}
+  
+.list-row {
+    line-height: 24pt;
+    padding: 1em 0 1em 0;
+    border-bottom: 1px solid #424242;
+}
+
+div.my-list>div:nth-of-type(odd) {
+    background: #2196f3;
+    color: white;
+}
+
+/* Rutinas y Dietas */
+.filters {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+  
+.filters * {
+    display: inline-block;
+  }
+  
+.filters label {
+    padding: 0.5rem 1rem;
+    margin-bottom: 0.25rem;
+    border-radius: 2rem;
+    min-width: 50px;
+    line-height: normal;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+  
+.filters label:hover {
+    background-color: #2196f3;
+    color: white;
+}
+
+.weekDays-selector input {
+    display: none!important;
+  }
+  
+.weekDays-selector input[type=checkbox] + label {
+    display: inline-block;
+    border-radius: 1rem;
+    height: 40px;
+    width: 30px;
+    margin-right: 3px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.weekDays-selector label {
+    text-align: center;
+    min-width: 50px;
+    line-height: normal;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.weekDays-selector label:hover{
+    background: #ff1111;
+    color: white;
+}
+
+.weekDays-selector input[type=checkbox]:checked + label {
+background: #424242;
+color: #ffffff;
+}
+
+.btn-select {
+    cursor: pointer;
+}
+
+.pointer {
+    cursor:pointer;
+}
+
+.options-list-inline {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.options-list-inline * {
+    display: inline-block
+}
+
+.options-list-inline label {
+    padding: 0.5rem 0.5rem;
+    margin-bottom: 0.25rem;
+    min-width: 50px;
+    line-height: normal;
+    cursor: pointer;
+    color: #2196f3;
+    font-weight: bolder;
+}
+
+.scrollable-list {
+    float:right;
+    height: 250px;
+    width:250px; 
+}
