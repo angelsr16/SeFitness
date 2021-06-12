@@ -157,3 +157,4 @@ function getIndexFromArray(array, arrayElement){
     });
     return index;
 }
+

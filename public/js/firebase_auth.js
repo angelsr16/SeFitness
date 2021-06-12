@@ -1,13 +1,13 @@
-var currentUser = firebase.auth().currentUser;
-if(currentUser != null){
-    console.log("Loggeado");
-}else{
-    console.log("no loggeado");
-    myUrl = `${location.origin}/index.html`;
-    if(location.href != location.origin && location.href != myUrl){
-      location.href = myUrl;
-    }
-}
+// var currentUser = firebase.auth().currentUser;
+// if(currentUser != null){
+//     console.log("Loggeado");
+// }else{
+//     console.log("no loggeado");
+//     myUrl = `${location.origin}/index.html`;
+//     if(location.href != location.origin && location.href != myUrl){
+//       location.href = myUrl;
+//     }
+// }
 
 function signOutFirebase(){
   firebase.auth().signOut().then(() => {

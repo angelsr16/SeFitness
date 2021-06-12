@@ -78,3 +78,4 @@ function removeRoutine(routineId){
     currentRoutineSelected = routineId;
     showModal("#exampleModal", true);
 }
+

@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-    var db = firebase.firestore();
     //Create exercises list from firebase
     db.collection(`exercises`).onSnapshot((querySnapshot) => {
         $(`#exercises_firebase_list`).empty();
@@ -166,3 +165,4 @@ function createVisualExcercise(exercise){
                 addExercise(exercise);
             });
 }
+

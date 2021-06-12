@@ -157,13 +157,13 @@
             </div>
             <!--<h6 class="text-center">Tipos de rutinas</h6>-->
             <ol class="filters">
-                <li> <label for="tipo1">Todos</label> </li>
-                <li> <label for="tipo2">Full body</label> </li>
-                <li> <label for="tipo3">Push/Pull</label> </li>
-                <li> <label for="tipo4">Upper/Lower</label> </li>
-                <li> <label for="tipo5">Push/Pull/Legs</label> </li>
-                <li> <label for="tipo6">Weider</label> </li>
-            </ol> 
+                <li onclick="filterRoutineTypes('All')"> <label for="tipo1">Todos</label> </li>
+                <li onclick="filterRoutineTypes('Full body')"> <label for="tipo2">Full body</label> </li>
+                <li onclick="filterRoutineTypes('Push/Pull')"> <label for="tipo3">Push/Pull</label> </li>
+                <li onclick="filterRoutineTypes('Upper/Lower')"> <label for="tipo4">Upper/Lower</label> </li>
+                <li onclick="filterRoutineTypes('Push/Pull/Legs')"> <label for="tipo5">Push/Pull/Legs</label> </li>
+                <li onclick="filterRoutineTypes('Weider')"> <label for="tipo6">Weider</label> </li>
+            </ol>
 
             
     
@@ -268,5 +268,6 @@
     
     <script src="../../js/entrenador/usuarios.js"></script>
     <script src="../../js/entrenador/asignar_rutinas.js"></script>
+    <script src="../../js/entrenador/filtrados.js"></script>
 </body>
 </html>
