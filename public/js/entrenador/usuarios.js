@@ -1,6 +1,6 @@
 $(document).ready(function(){
     
-    createUsers();
+    createUsers("");
 
     $("#btn_assign_routine").click(function (e){
         if(isObservationsFormValid(e)){
@@ -8,9 +8,33 @@ $(document).ready(function(){
         }
     })
 
+    $("#user_search_bar").on('input', function(){
+        search = $("#user_search_bar").val();
+        // // createUsers($("#user_search_bar").val());
+        // console.log(search.toUpperCase());
+        // console.log(user.data().name.toUpperCase());
+        // console.log(user.data().name.toUpperCase().indexOf(nombre))
+        // if(user.data().name.toUpperCase().indexOf(nombre.toUpperCase()) > -1){
+        // }
+        filterByName(search);
+    });
+
 });
 
-function createUsers(){
+userComponentIds = [];
+userComponentNames = [];
+
+function filterByName(search){
+    for(var i = 0; i < userComponentIds.length; i++){
+        if(userComponentNames[i].toUpperCase().indexOf(search.toUpperCase()) > -1){
+            $("#" + userComponentIds[i]).show();
+        }else{
+            $("#" + userComponentIds[i]).hide();
+        }
+    }
+}
+
+function createUsers(nombre){
     $("#assigned_routine_section").show();
     $("#estatus_section").show();
     $("#motivos_section").hide();
@@ -18,8 +42,9 @@ function createUsers(){
     db.collection(`users`).where(`role`, `==`, `Cliente`).onSnapshot((querySnapshot) => {
         $(`#users_firebase_list`).empty();
         querySnapshot.forEach((user) => {
+            
             routineElement = ``;
-            console.log(user.data().rutinaAsignada);
+            
             if(!user.data().rutinaAsignada){
                 routineElement = `<h6 class='col text-danger pointer' onclick='selectUser(\`${user.id}\`, \`${user.data().name}\`, \`${user.data().aliments}\`)'>Asignar <i class='bi bi-pencil-fill'></i></h6>`
                 createVisualUsers(user, routineElement, user.data().solicitudBaja);
@@ -65,6 +90,8 @@ function createVisualUsers(user, routineElement, solicitudBaja){
             `</div>` +
         `</div>`
     );
+    userComponentIds.push(user.id);
+    userComponentNames.push(user.data().name);
 }
 
 function showUnsubscribeRequests(){

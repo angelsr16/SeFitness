@@ -14,6 +14,17 @@ $(document).ready(function(){
         }
         appointmentForm.classList.add('was-validated');
     });
+
+    $("#user_search_bar").on('input', function(){
+        search = $("#user_search_bar").val();
+        // // createUsers($("#user_search_bar").val());
+        // console.log(search.toUpperCase());
+        // console.log(user.data().name.toUpperCase());
+        // console.log(user.data().name.toUpperCase().indexOf(nombre))
+        // if(user.data().name.toUpperCase().indexOf(nombre.toUpperCase()) > -1){
+        // }
+        filterByName(search);
+    });
 });
 
 availableHours = [
@@ -31,6 +42,19 @@ availableHours = [
 ];
 
 var userSelected = -1;
+
+userComponentIds = [];
+userComponentNames = [];
+
+function filterByName(search){
+    for(var i = 0; i < userComponentIds.length; i++){
+        if(userComponentNames[i].toUpperCase().indexOf(search.toUpperCase()) > -1){
+            $("#" + userComponentIds[i]).show();
+        }else{
+            $("#" + userComponentIds[i]).hide();
+        }
+    }
+}
 
 function createVisualUsers(){
     db.collection(`users`).where(`role`, `==`, `Cliente`).onSnapshot((querySnapshot) => {
@@ -53,7 +77,10 @@ function createVisualUsers(){
                         `</div>` +
                     `</div>`
                 );
+                userComponentIds.push(user.id);
+                userComponentNames.push(user.data().name);  
         });
+        
     });
 }
 
