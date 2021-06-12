@@ -63,7 +63,7 @@ $(document).ready(function(){
                 .then((docRef) => {
                     console.log("Document written with ID: ", docRef.id);
                     //alert("Registro realizado correctamente");
-                    location.href = 'login.html';
+                    location.href = 'index.html';
                     /*if(_role === "Entrenador") location.href = 'html/entrenador/citas/citas.html';
                     else location.href = 'html/nutriologo/citas/citas.html';*/
                 })
