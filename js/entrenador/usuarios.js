@@ -19,22 +19,21 @@ function createUsers(){
         $(`#users_firebase_list`).empty();
         querySnapshot.forEach((user) => {
             routineElement = ``;
-            db.collection(`users`).doc(user.id).collection(`routine`)
-            .get()
-            .then((querySnapshot) => {
-                if(querySnapshot.empty) {
-                    routineElement = `<h6 class='col text-danger pointer' onclick='selectUser(\`${user.id}\`, \`${user.data().name}\`, \`${user.data().aliments}\`)'>Asignar <i class='bi bi-pencil-fill'></i></h6>`
-                }
-                querySnapshot.forEach((routine) => {
-                    if(routine.id === user.data().rutinaAsignada){
-                        routineElement = `<h6 class='col pointer' onclick='viewRoutineInfo(\`${user.id}\`, \`${user.data().name}\`,\`${routine.id}\`, \`${user.data().aliments}\`)'>${routine.data().Nombre} <i class='bi bi-eye-fill'></i></h6> `
-                    }
-                });
+            console.log(user.data().rutinaAsignada);
+            if(!user.data().rutinaAsignada){
+                routineElement = `<h6 class='col text-danger pointer' onclick='selectUser(\`${user.id}\`, \`${user.data().name}\`, \`${user.data().aliments}\`)'>Asignar <i class='bi bi-pencil-fill'></i></h6>`
                 createVisualUsers(user, routineElement, user.data().solicitudBaja);
-            })
-            .catch((error) => {
-                console.log(`Error getting documents: `, error);
-            });
+            }else{
+                db.collection(`users`).doc(user.id).collection(`routine`).doc(user.data().rutinaAsignada)
+                .get()
+                .then((routine) => {
+                    routineElement = `<h6 class='col pointer' onclick='viewRoutineInfo(\`${user.id}\`, \`${user.data().name}\`,\`${routine.id}\`, \`${user.data().aliments}\`)'>${routine.data().Nombre} <i class='bi bi-eye-fill'></i></h6> `
+                    createVisualUsers(user, routineElement, user.data().solicitudBaja);
+                })
+                .catch((error) => {
+                    console.log(`Error getting documents: `, error);
+                });
+            } 
             
         });
     });
@@ -42,7 +41,7 @@ function createUsers(){
 
 function createVisualUsers(user, routineElement, solicitudBaja){
     requestIsVisible = (solicitudBaja) ? 'visible' : 'hidden';
-    console.log(solicitudBaja);
+    //console.log(solicitudBaja);
     $(`#users_firebase_list`)
     .append(
         `<div class='row list-row text-center' id='${user.id}'> ` +

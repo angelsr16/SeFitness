@@ -22,7 +22,7 @@ function viewRoutineInfo(userId, userName, routineId, userAliments){
         `<button style="background-color: #424242; color: white;" type="button" name="button" class="btn" onclick='selectUser(\`${userId}\`, \`${userName}\`, \`${userAliments}\`)'">
             Cambiar rutina
         </button>`);
-    console.log(routineId);
+    
     db.collection("users").doc(userId).collection("routine").doc(routineId).get()
         .then((routine) => {
             $("#routine_info_username").empty().append("Usuario: " + userName);
@@ -61,6 +61,7 @@ function viewRoutineInfo(userId, userName, routineId, userAliments){
 
 function selectUser(userId, userName, userAliments){
     userSelected = userId;
+    console.log("User selected: " + userSelected);
     $(`#user_to_asign`).empty().append(`Usuario: ` + userName);
     $("#user_to_asign_observations").empty().append("Usuario: " + userName);
     alimentsComponent = userAliments.replace(/(?:\r\n|\r|\n)/g, '<br>');
@@ -195,7 +196,7 @@ function assignRoutine(){
                 db.collection("users").doc(userSelected).get().then((user) =>{
                     if(user.exists){
                         rutinaAsignada = user.data().rutinaAsignada;
-                        if(rutinaAsignada != null){
+                        if(rutinaAsignada){
                             db.collection("routines").doc(rutinaAsignada).update({
                                 Usuarios: firebase.firestore.FieldValue.arrayRemove(userSelected)
                             });
