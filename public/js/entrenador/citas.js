@@ -100,6 +100,9 @@ function recordUserProgress(userSelected){
         db.collection("citas").doc(appointmentIdSelected).update({
             estado: "Realizada"
         });
+        db.collection("users").doc(userSelected).collection("citas").doc(appointmentIdSelected).update({
+            estado: "Realizada"
+        });
     }).catch((error) =>{
 
     });

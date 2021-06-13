@@ -117,7 +117,7 @@ function assignAppointment(userId){
             db.collection("fechas").doc(selectedDate).set({
                 horasOcupadas: firebase.firestore.FieldValue.arrayUnion(selectedTime)
             },{merge:true});
-            db.collection("users").doc(userSelected).collection("citas").add({
+            db.collection("users").doc(userSelected).collection("citas").doc(docRef.id).set({
                 citaRef: docRef.id,
                 fechaInMillis: newDate.getTime(),
                 fecha: selectedDate,
