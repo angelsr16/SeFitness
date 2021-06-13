@@ -39,6 +39,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="perfil.html">Mi perfil</a>
                     </li>
+                    <li><a class="nav-link" onclick="signOutFirebase()" style="cursor: pointer;">Cerrar sesión</a></li>
                 </ul>
             </div>
         </div>
@@ -48,59 +49,57 @@
     <div class="container">
 		<div class="d-flex justify-content-center ">
 			<div class="user_card mt-5">
-				<div class="justify-content-center m-3">
-					<form>
-                        <div class="input-group">
-                            <input type="text" name="" class="form-control input_user" value="Angel Sanchez Romero" placeholder="Nombre completo">
-                        </div>
-                        <div class="mb-3">
-                            <p class="text-danger error-message" style="display:none;">Error en el registro</p>
-                        </div>
-                        
-                        <div class="input-group">
-                            <input type="text" name="" class="form-control input_user" value="correo@hotmail.com" placeholder="Correo electrónico">
-                        </div>
-                        <div class="mb-3">
-                            <p class="text-danger error-message" style="display:none;">Error en el registro</p>
+				<div class="justify-content-center ms-3 me-3 mt-3">
+					<form id="editar_perfil_form" class="needs-validation" novalidate style="color:white;">
+                        <label class="form-label">Nombre completo</label>
+                        <input type="text" class="form-control" id="form_name" required>
+                        <div class="invalid-feedback">
+                            Escriba su nombre
                         </div>
 
-                        <div class="form-group">
-                            <select class="form-control" id="genero">
-                                <option>Masculino</option>
-                                <option>Femenino</option>
-                            </select>
-                            <p class="text-danger error-message" style="display:none;">Error en el registro</p>
-                        </div>
-                        <div class="mb-3">
-                            <p class="text-danger error-message" style="display:none;">Error en el registro</p>
-                        </div>      
+                        <!-- <label class="form-label mt-2">Correo</label>
+                        <input type="text" class="form-control" id="validationCustom01" value="Tipo de ejercicio 1" required>
+                        <div class="invalid-feedback">
+                            Escriba su correo electrónico
+                        </div> -->
+
+                        <label style="color:white;" class="mt-2">Genero</label>
+                        <select class="form-control" id="form_genre" required>
+                            <option>Masculino</option>
+                            <option>Femenino</option>
+                        </select>     
                     
-                        <div class="input-group">
-                            <input type="date" name="" class="form-control input_user" value="2000-09-16">
+                        <label style="color:white;" class="mt-2">Fecha de nacimiento:</label>
+                        <input id="form_birth_date" type="date" name="" class="form-control" value="" required>
+                        <!-- <div class="invalid-feedback">
+                            Elija su fecha de nacimiento
+                        </div> -->
+
+                        <!-- <div class="mt-3">
+                            <strong onclick="showPasswordFields()" style="cursor: pointer;">Cambiar contraseña</strong>
                         </div>
-                        <div class="mb-3">
-                            <p class="text-danger error-message" style="display:none;">Error en el registro</p>
-                        </div>
+
+                        <div id="password_panel" style="display: none;">
+                            <label style="color:white;" class="mt-2">Ingresa tu nueva contraseña:</label>
+                            <input id="form_password" type="password" name="" class="form-control" value="" placeholder="Contraseña">
+                            <div class="invalid-feedback">
+                                Escriba su contraseña correctamente
+                            </div>
+    
+                            <input id="form_password_2" type="password" name="" class="form-control mt-3" value="" placeholder="Confirmar contraseña">
+                            <div class="invalid-feedback">
+                                Escriba su contraseña correctamente
+                            </div>
+                        </div> -->
                         
-                        <div class="input-group">
-                            <input type="password" name="" class="form-control input_user" value="pruebacontraseña" placeholder="Contraseña">
-                        </div>
-                        <div class="mb-3">
-                            <p class="text-danger error-message" style="display:none;">Error en el registro</p>
-                        </div>
-                        <div class="input-group">
-                            <input type="password" name="" class="form-control input_user" value="pruebacontraseña" placeholder="Confirmar contraseña">
-                        </div>
-                        <div class="mb-3">
-                            <p class="text-danger error-message" style="display:none;">Error en el registro</p>
-                        </div>
                     
                         <div class="d-flex justify-content-center mt-2 login_container" >
                             <button id="guardar_btn" type="button" name="button" class="btn step-btn" style="display: none;">Aceptar</button>
                         </div>
-                        <div class="d-flex justify-content-center mt-2login_container">
-                            <button id="guardar_btn" type="button" name="button" class="btn step-btn" style="display: initial;">Editar</button>
+                        <div class="d-flex justify-content-center mt-2 login_container">
+                            <button id="editar_btn" type="button" name="button" class="btn step-btn" style="display: initial;">Editar</button>
                         </div>
+                        
 				  </form>
 				</div>
 			</div>
@@ -122,5 +121,6 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
     crossorigin="anonymous"></script>
     <script src="../../js/util.js"></script>
+    <script src="../../js/perfil.js"></script>
 </body>
 </html>

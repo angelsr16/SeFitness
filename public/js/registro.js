@@ -52,7 +52,7 @@ $(document).ready(function(){
             .then((userCredential) => {
                 //Signed in
                 var user = userCredential.user;
-                db.collection("users").add({
+                db.collection("users").doc(user.uid).set({
                     name: _name,
                     genre: _genre,
                     email: _email,
@@ -60,8 +60,8 @@ $(document).ready(function(){
                     role: _role,
                     uid: user.uid
                 })
-                .then((docRef) => {
-                    console.log("Document written with ID: ", docRef.id);
+                .then(() => {
+                    //console.log("Document written with ID: ", docRef.id);
                     //alert("Registro realizado correctamente");
                     location.href = 'index.html';
                     /*if(_role === "Entrenador") location.href = 'html/entrenador/citas/citas.html';

@@ -51,6 +51,12 @@ $(document).ready(function(){
             db.collection("routines").doc(currentRoutineSelected).get().then((routine) =>{
                 if(routine.data().Usuarios.length == 0){
                     console.log("Eliminar");
+                    console.log(routine.data().Ejercicios);
+                    routine.data().Ejercicios.forEach((ejercicio) =>{
+                        db.collection("exercises").doc(ejercicio).update({
+                            Rutinas: firebase.firestore.FieldValue.arrayRemove(currentRoutineSelected)
+                        });
+                    });
                     //Delete routine
                     db.collection("routines").doc(currentRoutineSelected).delete().then(() => {
                         console.log("Document successfully deleted!");
