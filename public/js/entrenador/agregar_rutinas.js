@@ -45,12 +45,20 @@ $(document).ready(function(){
     btnRemoveExercise = $("#btn_remove_exercise");
     btnRemoveExercise.click(function(e){
         if(currentExerciseSelected != -1){
-            //Delete exercise
-            db.collection("exercises").doc(currentExerciseSelected).delete().then(() => {
-                console.log("Document successfully deleted!");
-            }).catch((error) => {
-                console.error("Error removing document: ", error);
-            });
+            db.collection("exercises").doc(currentExerciseSelected).get().then((exercise) =>{
+                if(exercise.data().Rutinas.length == 0){
+                    console.log("Eliminar");
+                    // Delete exercise
+                    db.collection("exercises").doc(currentExerciseSelected).delete().then(() => {
+                        console.log("Document successfully deleted!");
+                    }).catch((error) => {
+                        console.error("Error removing document: ", error);
+                    });
+                }else{
+                    displayAlertPanel("Este ejercicio está asignado a una rutina, no puede ser eliminado");
+                    console.log("This exercise is used by a routine");
+                }
+            })
         }
     });
 
@@ -87,7 +95,7 @@ function createRoutine(database){
     if(exercisesAdded.length > 0){
         createFirebaseRoutine(database);
     }else{
-        $(".alert").show();
+        displayAlertPanel("¡Agrega por lo menos un ejercicio a la rutina!")
     }
 }
 
@@ -104,6 +112,11 @@ function createFirebaseRoutine(database){
     .then((docRef) => {
         
         console.log("Rutina agregada correctamente");
+        exercisesAdded.forEach(exerciseId => {
+            db.collection("exercises").doc(exerciseId).update({
+                Rutinas: firebase.firestore.FieldValue.arrayUnion(docRef.id)
+            })
+        });
         location.reload();
     })
     .catch((error) => {
@@ -125,10 +138,11 @@ function createFirebaseExercise(database){
         Repeticiones: exerciseRepetitions,
         Series: exerciseSeries,
         Intensidad: exerciseIntensity,
-        Categoria: exerciseCategory
+        Categoria: exerciseCategory,
+        Rutinas: []
     })
     .then((docRef) =>{
-        console.error("Ejercicio registrado correctamente: ", docRef);
+        console.log("Ejercicio registrado correctamente: ", docRef);
         hideAndShow('#create_exercise', '#create_routine_panel');
     })
     .catch((error) => {

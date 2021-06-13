@@ -14,12 +14,12 @@ $(document).ready(function(){
 });
 
 
-function viewRoutineInfo(userId, userName, routineId, userAliments){
+function viewRoutineInfo(userId, userName, routineId, userailments){
     hideAndShow('#users_list', '#routine_info');
     $("#routine_info_edit")
     .empty()
     .append(
-        `<button style="background-color: #424242; color: white;" type="button" name="button" class="btn" onclick='selectUser(\`${userId}\`, \`${userName}\`, \`${userAliments}\`)'">
+        `<button style="background-color: #424242; color: white;" type="button" name="button" class="btn" onclick='selectUser(\`${userId}\`, \`${userName}\`, \`${userailments}\`)'">
             Cambiar rutina
         </button>`);
     
@@ -59,13 +59,13 @@ function viewRoutineInfo(userId, userName, routineId, userAliments){
         });
 }
 
-function selectUser(userId, userName, userAliments){
+function selectUser(userId, userName, userailments){
     userSelected = userId;
     console.log("User selected: " + userSelected);
     $(`#user_to_asign`).empty().append(`Usuario: ` + userName);
     $("#user_to_asign_observations").empty().append("Usuario: " + userName);
-    alimentsComponent = userAliments.replace(/(?:\r\n|\r|\n)/g, '<br>');
-    $("#padecimientos_panel").empty().append(`${alimentsComponent}`);
+    ailmentsComponent = userailments.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    $("#padecimientos_panel").empty().append(`${ailmentsComponent}`);
     //console.log(`Usuario seleccionado` + userSelected);
     hideAndShow('#users_list', '#routines_list');
     $("#routine_info").hide();

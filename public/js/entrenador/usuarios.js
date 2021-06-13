@@ -44,15 +44,15 @@ function createUsers(nombre){
         querySnapshot.forEach((user) => {
             
             routineElement = ``;
-            
+            console.log(user.data().rutinaAsignada);
             if(!user.data().rutinaAsignada){
-                routineElement = `<h6 class='col text-danger pointer' onclick='selectUser(\`${user.id}\`, \`${user.data().name}\`, \`${user.data().aliments}\`)'>Asignar <i class='bi bi-pencil-fill'></i></h6>`
+                routineElement = `<h6 class='col text-danger pointer' onclick='selectUser(\`${user.id}\`, \`${user.data().name}\`, \`${user.data().ailments}\`)'>Asignar <i class='bi bi-pencil-fill'></i></h6>`
                 createVisualUsers(user, routineElement, user.data().solicitudBaja);
             }else{
                 db.collection(`users`).doc(user.id).collection(`routine`).doc(user.data().rutinaAsignada)
                 .get()
                 .then((routine) => {
-                    routineElement = `<h6 class='col pointer' onclick='viewRoutineInfo(\`${user.id}\`, \`${user.data().name}\`,\`${routine.id}\`, \`${user.data().aliments}\`)'>${routine.data().Nombre} <i class='bi bi-eye-fill'></i></h6> `
+                    routineElement = `<h6 class='col pointer' onclick='viewRoutineInfo(\`${user.id}\`, \`${user.data().name}\`,\`${routine.id}\`, \`${user.data().ailments}\`)'>${routine.data().Nombre} <i class='bi bi-eye-fill'></i></h6> `
                     createVisualUsers(user, routineElement, user.data().solicitudBaja);
                 })
                 .catch((error) => {
@@ -74,7 +74,7 @@ function createVisualUsers(user, routineElement, solicitudBaja){
                 `<div class='row' >` +
                     `<h6 class='col-md-4'>${user.data().name}</h6>` +
                     `<h6 class='col-md-3'>${user.data().email}</h6>` +
-                    `<h6 class='col-md-3'>Pendiente</h6>` +
+                    `<h6 class='col-md-3'>${user.data().status}</h6>` +
                     `<div class='col-md-2   '>` +
                         `<div class='row justify-content-center'>` +
                             routineElement +

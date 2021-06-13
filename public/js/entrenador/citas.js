@@ -35,7 +35,6 @@ function populateAppointmentsList(){
                     );
                 }
                 else{
-                    alert(":c");
                 }
             });
             
