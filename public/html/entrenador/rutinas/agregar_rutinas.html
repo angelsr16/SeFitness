@@ -106,58 +106,69 @@
             <div id="edit_exercise" style="display:none;">
                 <div class="d-flex justify-content-center">
                     <div class="profile-register">
-                        <form class="row g-3 needs-validation" novalidate style="color:white;">
-                            <h5>Ejercicio 1</h5>
+                        <form id="exercise_form_edit" class="row g-3 needs-validation" novalidate style="color:white;">
+                            <h5>Editar ejercicio: <strong id="edit_nombre_ejercicio"></strong></h5>
                             <div class="col-md-4">
-                                <label for="validationCustom01" class="form-label">Tipo de ejercicio</label>
-                                <input type="text" class="form-control" id="validationCustom01" value="Tipo de ejercicio 1" required>
-                                <div class="valid-feedback">
-                                    Looks good!
+                                <label class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="form_name_exercise_edit" value="" required>
+                                <div class="invalid-feedback">
+                                    Escribe un nombre
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label class="form-label">Tipo de ejercicio</label>
+                                <select class="form-control" id="form_type_exercise_edit">
+                                    <option>Aerobicos</option>
+                                    <option>Fuerza</option>
+                                    <option>Flexibilidad</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Elige el tipo de ejercicio
                                 </div>
                             </div>
         
                             <div class="col-md-4">
-                                <label for="validationCustomUsername" class="form-label">Repeticiones</label>
+                                <label class="form-label">Repeticiones</label>
                                 <div class="input-group has-validation">
-                                    <input value="3" type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                                    <input type="text" class="form-control" id="form_repetitions_edit" aria-describedby="inputGroupPrepend" required>
                                     
                                   <div class="invalid-feedback">
-                                    Please choose a username.
+                                    Escribe el número de repeticiones
                                   </div>
                                 </div>
                             </div>
         
                             <div class="col-md-4">
-                                <label for="validationCustomUsername" class="form-label">Series</label>
+                                <label class="form-label">Series</label>
                                 <div class="input-group has-validation">
-                                    <input value="4" type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
-                                    
-                                  <div class="invalid-feedback">
-                                    Please choose a username.
-                                  </div>
+                                    <input type="text" class="form-control" id="form_series_edit" aria-describedby="inputGroupPrepend" required>
+                                    <div class="invalid-feedback">
+                                        Escribe el número de series
+                                    </div>
                                 </div>
                             </div>
         
                             <div class="col-md-4">
-                              <label for="validationCustom02" class="form-label">Intensidad</label>
-                              <input type="text" class="form-control" id="validationCustom02" value="Leve" required>
-                              <div class="valid-feedback">
-                                Looks good!
+                              <label class="form-label">Intensidad</label>
+                              <input type="text" class="form-control" id="form_intensity_edit" value="" required>
+                              <div class="invalid-feedback">
+                                Elige la intensidad del ejercicio
                               </div>
                             </div>
 
                             <div class="col-md-4">
-                                <label for="validationCustom02" class="form-label">Categoría</label>
-                                <input type="text" class="form-control" id="validationCustom02" value="Cardiovascular" required>
-                                <div class="valid-feedback">
-                                    Looks good!
+                                <label class="form-label">Categoría</label>
+                                <input type="text" class="form-control" id="form_category_edit" value="" required>
+                                <div class="invalid-feedback">
+                                    Elige la categoría del ejercicio
                                 </div>
                             </div>
         
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col">
-                                        <button type="button" name="button" class="btn my-btn" onclick="hideAndShow('#edit_exercise', '#create_routine_panel')">Aceptar</button>
+                                        <button id="btnCreateExercise" type="button" name="button" class="btn my-btn">Editar ejercicio</button>
                                     </div>
                                     <div class="col-md-2">
                                         <button type="button" name="button" class="btn my-btn-cancel" onclick="hideAndShow('#edit_exercise','#create_routine_panel')">Regresar</button>

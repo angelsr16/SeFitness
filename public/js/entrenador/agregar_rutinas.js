@@ -10,6 +10,19 @@ $(document).ready(function(){
 
     var routineForm = $("#routine_form")[0];
     var newExerciseForm = $("#exercise_form")[0];
+    var editExerciseForm = $("#exercise_form_edit")[0];
+
+    btnEditExercise = $("#btnCreateExercise");
+    btnEditExercise.click(function(e){
+        var isValid = editExerciseForm.checkValidity();
+        if (!isValid) {
+            e.preventDefault();
+            e.stopPropagation();
+        }else{
+            editExercise();
+        }
+        editExerciseForm.classList.add('was-validated');
+    });
 
 
     btnCreateRoutine = $("#btnCreateRoutine");
@@ -65,6 +78,7 @@ $(document).ready(function(){
 });
 
 currentExerciseSelected = -1;
+currentExerciseForEditSelected = -1;
 
 function removeExerciseFromFirebase(exerciseId){
     console.log(exerciseId);
@@ -153,7 +167,7 @@ function createFirebaseExercise(database){
 function createVisualExcercise(exercise){
     $(`#exercises_firebase_list`).append(`<div class='row list-row' id='${exercise.id}'> ` +
             `<h6 class='col-md-8 btn-select' id='${exercise.id}_select' >${exercise.data().Nombre}</h6>` +
-            `<div class='col-md-1 btn-select' onclick='hideAndShow('#create_routine_panel','#edit_exercise')'>` +
+            `<div class='col-md-1 btn-select' id='${exercise.id}_edit'>` +
                 `<i class='bi bi-pencil-fill'></i>` +
             `</div>` +
             `<div class='col-md-1 btn-select'  onclick='removeExerciseFromFirebase(\``+exercise.id+`\`)'>` +
@@ -175,8 +189,49 @@ function createVisualExcercise(exercise){
                 `</div>` +
             `</div>` +
         `</div>`);
-            $(`#${exercise.id}_select`).on('click', function(){
-                addExercise(exercise);
-            });
+        $(`#${exercise.id}_select`).on('click', function(){
+            addExercise(exercise);
+        });
+        $(`#${exercise.id}_edit`).on('click', function(){
+            editFirebaseExercise(exercise);
+        });
+}
+
+function editFirebaseExercise(exercise){
+    hideAndShow('#create_routine_panel','#edit_exercise');
+    $("#edit_nombre_ejercicio").empty().append(exercise.data().Nombre);
+
+    $("#form_name_exercise_edit").val(exercise.data().Nombre);
+    $("#form_type_exercise_edit").val(exercise.data().Tipo);
+    $("#form_repetitions_edit").val(exercise.data().Repeticiones);
+    $("#form_series_edit").val(exercise.data().Series);
+    $("#form_intensity_edit").val(exercise.data().Intensidad);
+    $("#form_category_edit").val(exercise.data().Categoria);
+    currentExerciseForEditSelected = exercise.id;
+}
+
+function editExercise(){
+    exerciseName = getFormValue("#form_name_exercise_edit");
+    exerciseType = $("#form_type_exercise_edit option:selected").text();
+    exerciseRepetitions = getFormValue("#form_repetitions_edit");
+    exerciseSeries = getFormValue("#form_series_edit");
+    exerciseIntensity = getFormValue("#form_intensity_edit");
+    exerciseCategory = getFormValue("#form_category_edit");
+    db.collection("exercises").doc(currentExerciseForEditSelected).update({
+        Nombre: exerciseName,
+        Tipo: exerciseType,
+        Repeticiones: exerciseRepetitions,
+        Series: exerciseSeries,
+        Intensidad: exerciseIntensity,
+        Categoria: exerciseCategory
+    })
+    .then(() => {
+        console.log("Document successfully updated!");
+        hideAndShow('#edit_exercise', '#create_routine_panel');
+    })
+    .catch((error) => {
+        // The document probably doesn't exist.
+        console.error("Error updating document: ", error);
+    });
 }
 

@@ -8,7 +8,7 @@ $(document).ready(function(){
             .append(
                 `<div class='row list-row' id='${routine.id}'> ` +
                     `<h6 class='col-md-9' id='${routine.id}_select'>${routine.data().Nombre}</h6> ` +
-                    `<div class='col-md-1 btn-select' onclick='hideAndShow(\`#routines_list_\`, \`#edit_routine_\`)'><i class='bi bi-pencil-fill'></i></div> ` +
+                    `<div class='col-md-1 btn-select' onclick='hideAndShow(\`#routines_list\`, \`#edit_routine\`)'><i class='bi bi-pencil-fill'></i></div> ` +
                     `<div class='col-md-1 btn-select' onclick='removeRoutine(\``+routine.id+`\`)'><i class='bi bi-x-square-fill'></i></div> ` +
                     `<div class='col-md-1 btn-select' onclick='showDetails(\``+routine.id+`_exercises\`, true)' id='${routine.id}_exercises_view'><i class='bi bi-eye-fill'></i></div> ` +
                     `<div class='col btn-select' onclick='showDetails(\``+routine.id+`_exercises\`, false)' id='${routine.id}_exercises_hide' style='display: none;'><i class='bi bi-eye-slash-fill'></i></div> ` +
