@@ -124,6 +124,12 @@ function isDaySelectorValid(chkBoxDays){
     return false
 }
 
+function getCurrentFormattedDate(){
+    date = new Date();
+    month = ((date.getMonth()+1) < 10) ? "0"+(date.getMonth()+1) : (date.getMonth()+1);
+    return `${date.getFullYear()}-${month}-${date.getDate()}`;
+}
+
 function getFormattedDate(milliseconds){
     const months = [
         'Enero',
@@ -157,4 +163,29 @@ function getIndexFromArray(array, arrayElement){
     });
     return index;
 }
+
+function getCurrentTimeToNumber(){
+    var d = new Date();
+    var h = d.getHours();
+    var m = (d.getMinutes() < 10) ? `0${d.getMinutes()}` : d.getMinutes();
+    return `${h}${m}`;
+}
+
+function limitDatePicker(){
+    var dtToday = new Date();
+
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    var minDate = year + '-' + month + '-' + day;   
+
+}
+
+
 

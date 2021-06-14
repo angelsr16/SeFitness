@@ -38,19 +38,14 @@
 
     <div class="container" id="dates_list">
         <div class="container mt-5">
-            <div class="row">
-                <div class="col-md-3">
-                    <input type="date" class="form-control mb-3">
+            <div class="d-flex justify-content-end mb-3">
+                <!-- <div class="col-md-3">
+                    <input id="search_date" type="date" class="form-control mb-3">
+                </div> -->
+                <div>
+                  <button id="btnCitasRetrasadas" onclick="populateLateAppointmentsList()" type="button" name="button" class="btn my-btn-cancel">Citas retrasadas</button>
+                  <button style="display: none;" onclick="populateAppointmentsList()" id="btnCitasATiempo" type="button" name="button" class="btn my-btn-cancel">Regresar</button>
                 </div>
-                <div class="col-md-3">
-                    <input type="time" class="form-control mb-3">
-                </div>
-                <div class="col-md-4">
-                    <button type="button" name="button" class="btn" style="background-color: #2196f3; color: white;">Buscar</button>
-                </div>
-                <div class="col-md-2">
-                  <button type="button" name="button" class="btn my-btn-cancel">Citas retrasadas</button>
-              </div>
             </div>
         </div>
         
@@ -63,30 +58,40 @@
             </div>
 
             <div class="my-list" id="appointments_firebase_list">
-              <!-- <div class="row list-row text-center" id="user_1">
-                  <h6 class="col-md-3">Angel de Jesus Sanchez Romero</h6>
-                  <h6 class="col-md-2">21/05/2021</h6>
-                  <h6 class="col-md-2">10:00 hrs</h6>
-                  <h6 class="col pointer" onclick="hideAndShow('#dates_list', '#profile_register')">Registrar avances</h6>  
-                  <h6 class="col">Modificar</h6>
-                  <h6 class="col text-danger">Eliminar <i class="col bi bi-stopwatch-fill" style="visibility: hidden;"></i></h6>
-              </div>
-          
-              <div class="row list-row text-center">
-                  <h6 class="col-md-3">David Ramirez Sosteno</h6>
-                  <h6 class="col-md-2">21/05/2021</h6>
-                  <h6 class="col-md-2">17:30 hrs</h6>
-                  <h6 class="col pointer">Registrar avances</h6>
-                  <h6 class="col pointer">Modificar</h6>
-                  <h6 class="col text-danger">Eliminar <i class="col bi bi-stopwatch-fill" style="visibility: hidden;"></i></h6>
-                  
-              </div> -->
 
             </div>
         
         </div>
     </div>
 
+    <div class="container mt-5" id="edit_appointment" style="display: none;">
+      <div class="row header-list mb-3"> 
+        <h6>Editar cita: <strong id="username_appointment"></strong></h6>
+      </div>
+        <div class="row">
+            <form id="appointment_form" class="row needs-validation" novalidate>
+                <div class="col-md-6">
+                  <label for="">Fecha asignada actualmente: <strong id="currentDateAssigned"></strong></label>
+                  <br>
+                  <label for="">Fechas disponibles:</label>
+                    <input id="date_picker" type="date" class="form-control mb-3" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="">Hora asignada actualmente: <strong id="currentHourAssigned"></strong></label>
+                    <br>
+                    <label for="">Horas disponibles:</label>
+                    <select class="form-control" id="time_picker" required>
+                    </select>
+                    
+                </div>
+                <div id="selected_user">
+                </div>
+                <div class="d-flex justify-content-center mt-3 login_container">
+                    <button onclick="editFirebaseAppointment()" type="button" name="button" class="btn login_btn">Editar</button>
+                </div>
+            </form>
+        </div>  
+    </div>
     
     <div class="container mt-5" id="profile_register" style="display:none;">
         <h5 class="text-center" id="selected_user"></h5>
@@ -340,6 +345,24 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="cancelAppointmentModal" tabindex="-1" role="dialog" aria-labelledby="cancelAppointmentModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="cancelAppointmentModalLabel">Cancelar cita</h5>
+          </div>
+          <div class="modal-body">
+          ¿Estás seguro de cancelar esta cita?
+          </div>
+          <div class="modal-footer">
+          <button id="btn_cancel_remove" type="button" class="btn btn-secondary" data-dismiss="modal" onclick="showModal('#cancelAppointmentModal', false)">Cancelar</button>
+          <button id="btn_remove_routine" type="button" class="btn btn-danger" onclick="cancelAppointment()">Eliminar</button>
+          </div>
+      </div>
+      </div>
+  </div>
+
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.6.2/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-auth.js"></script>
@@ -354,6 +377,7 @@
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
     crossorigin="anonymous"></script>
     <script src="../../../js/util.js"></script>
+    <script src="../../../js/entrenador/asignar_citas.js"></script>
     <script src="../../../js/entrenador/citas.js"></script>
 </body>
 </html>

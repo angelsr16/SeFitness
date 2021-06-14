@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    console.log(getCurrentTimeToNumber())
     limitDatePicker();
     createVisualUsers();
 
@@ -41,10 +42,54 @@ availableHours = [
     '18:00','18:30',
 ];
 
+numberHours = [
+    800,830,
+    900,930,
+    1000,1030,
+    1100,1130,
+    1200,1230,
+    1300,1330,
+    1400,1430,
+    1500,1530,
+    1600,1630,
+    1700,1730,
+    1800,1830,
+]
+
 var userSelected = -1;
 
 userComponentIds = [];
 userComponentNames = [];
+
+function resetTimeArrays(){
+    availableHours = [
+        '08:00','08:30',
+        '09:00','09:30',
+        '10:00','10:30',
+        '11:00','11:30',
+        '12:00','12:30',
+        '13:00','13:30',
+        '14:00','14:30',
+        '15:00','15:30',
+        '16:00','16:30',
+        '17:00','17:30',
+        '18:00','18:30',
+    ];
+    
+    numberHours = [
+        800,830,
+        900,930,
+        1000,1030,
+        1100,1130,
+        1200,1230,
+        1300,1330,
+        1400,1430,
+        1500,1530,
+        1600,1630,
+        1700,1730,
+        1800,1830,
+    ]
+}
 
 function filterByName(search){
     for(var i = 0; i < userComponentIds.length; i++){
@@ -148,6 +193,7 @@ function limitDatePicker(){
     var minDate = year + '-' + month + '-' + day;    
     $('#date_picker').attr('min', minDate);
     $('#date_picker').change(function () {
+        resetTimeArrays();
         searchAvailableHours($('#date_picker').val());
     });
     $('#date_picker').val(year + '-' + month + '-' + day);
@@ -164,7 +210,7 @@ function searchAvailableHours(selectedDate){
                     indexToRemove = getIndexFromArray(availableHours, hora);
                     if(indexToRemove != -1){
                         availableHours.splice(indexToRemove, 1);
-                        console.log("Quitar: " + indexToRemove);
+                        numberHours.splice(indexToRemove, 1);
                     }
                 }
                 cont++;
@@ -179,7 +225,19 @@ function searchAvailableHours(selectedDate){
 
 function populateAvailableHours(){
     $("#time_picker").empty();
+    selectedDate = $('#date_picker').val();
+    currentDate = getFormattedDate(new Date().getTime());
+    console.log(selectedDate+":" + getCurrentFormattedDate());
+    if(selectedDate == getCurrentFormattedDate()){
+        currentTime = getCurrentTimeToNumber();
+    }else{
+        currentTime = 0;
+    }
+    cont = 0;
     availableHours.forEach((hora) =>{
-        $('#time_picker').append(`<option>${hora}</option>`)
+        if(numberHours[cont] > currentTime){
+            $('#time_picker').append(`<option>${hora}</option>`);
+        }
+        cont++;
     });
 }
