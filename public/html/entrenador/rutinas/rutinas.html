@@ -44,30 +44,86 @@
         </div>
     </nav>
 
-    <div class="container mt-5" id="routines_list">
+    <div class="container mt-5">
         <div id="alerts_panel">
 
         </div>
-        <div class="row header-list mb-3">
-            <h2>Rutinas</h2>
+        <div id="routines_list">
+            <div class="row header-list mb-3">
+                <h2>Rutinas</h2>
+            </div>
+            <h6 class="text-center">Tipos de rutinas</h6>
+            <ol class="filters">
+                <li onclick="filterRoutineTypes('All')"> <label for="tipo1">Todos</label> </li>
+                <li onclick="filterRoutineTypes('Full body')"> <label for="tipo2">Full body</label> </li>
+                <li onclick="filterRoutineTypes('Push/Pull')"> <label for="tipo3">Push/Pull</label> </li>
+                <li onclick="filterRoutineTypes('Upper/Lower')"> <label for="tipo4">Upper/Lower</label> </li>
+                <li onclick="filterRoutineTypes('Push/Pull/Legs')"> <label for="tipo5">Push/Pull/Legs</label> </li>
+                <li onclick="filterRoutineTypes('Weider')"> <label for="tipo6">Weider</label> </li>
+            </ol>
+    
+            <div class="my-list" id="routines_firebase_list">
+                
+            </div>
         </div>
-        <h6 class="text-center">Tipos de rutinas</h6>
-        <ol class="filters">
-            <li onclick="filterRoutineTypes('All')"> <label for="tipo1">Todos</label> </li>
-            <li onclick="filterRoutineTypes('Full body')"> <label for="tipo2">Full body</label> </li>
-            <li onclick="filterRoutineTypes('Push/Pull')"> <label for="tipo3">Push/Pull</label> </li>
-            <li onclick="filterRoutineTypes('Upper/Lower')"> <label for="tipo4">Upper/Lower</label> </li>
-            <li onclick="filterRoutineTypes('Push/Pull/Legs')"> <label for="tipo5">Push/Pull/Legs</label> </li>
-            <li onclick="filterRoutineTypes('Weider')"> <label for="tipo6">Weider</label> </li>
-        </ol>
 
-        <div class="my-list" id="routines_firebase_list">
-            
+        <div class="row" id="edit_routine" style="display: none;">
+            <!-- <div class="row">
+                <ol class="options-list-inline" style="margin:0">
+                    <li onclick="hideAndShow('#create_routine_panel', '#create_exercise')"><label>Registrar nuevo ejercicio</label></li>
+                </ol>
+            </div> -->
+            <div class="d-flex justify-content-end mb-3">
+                
+                <button id="btn_dar_baja" onclick="hideAndShow('#edit_routine', '#routines_list');" type="button" name="button" class="btn my-btn-cancel">Regresar</button>
+            </div>
+    
+            <div class="container col-md-6 border" id="exercises_list">
+                <div class="row header-list mb-3"> <h6>Ejercicios</h6> </div>
+                    <h6 class="text-center">Tipos de ejercicios</h6>
+                    <ol class="filters">
+                        <li onclick="filterExerciseTypes('All')"> <label for="tipo1">Todos</label> </li>
+                        <li onclick="filterExerciseTypes('Aerobicos')"> <label for="tipo2">Aerobicos</label> </li>
+                        <li onclick="filterExerciseTypes('Flexibilidad')"> <label for="tipo3">Flexibilidad</label> </li>
+                        <li onclick="filterExerciseTypes('Fuerza')"> <label for="tipo4">Fuerza</label> </li>
+                    </ol>
+                
+                <div class="my-list" id="exercises_firebase_list">
+                
+                </div>
+            </div>
+    
+            <div class="container col-md-5" id="newRoutine_list">
+                <div class="row header-list mb-3"> <h6>Editar</h6></div>
+                <form id="routine_edit_form" class="needs-validation">
+                    <input id="form_name_edit" type="text" class="form-control" value="" placeholder="Nombre de la rutina" required>
+                    <div class="invalid-feedback">
+                        Escriba el nombre de la rutina
+                    </div>
+    
+                    <select class="form-control mt-3 mb-3" id="form_type_edit">
+                        <option>Full body</option>
+                        <option>Push/Pull</option>
+                        <option>Upper/Lower</option>
+                        <option>Push/Pull/Legs</option>
+                        <option>Weider</option>
+                    </select>
+                    <div id="new_exercises_list">
+                        
+                    </div>
+                    <div class="d-flex justify-content-center mt-3 login_container">
+                        <button type="button" name="button" class="btn login_btn" id="btnEditRoutine">Editar</button>
+                    </div>
+                </form>
+    
+            </div>
         </div>
 
     </div>
 
-    <div class="container" id="edit_routine" style="display:none;">
+    
+
+    <!-- <div class="container" id="edit_routine" style="display:none;">
         <div class="row mt-3">
             <div class="row">
                 <ol class="options-list-inline" style="margin:0">
@@ -220,7 +276,7 @@
 
             
         </div>
-    </div>
+    </div> -->
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -256,6 +312,7 @@
     <script src="../../../js/util.js"></script>
     <!--<script src="../../../js/entrenador/agregar_rutinas.js"></script>-->
     <script src="../../../js/entrenador/rutinas.js"></script>
+    <script src="../../../js/entrenador/agregar_rutinas.js"></script>
     <script src="../../../js/entrenador/filtrados.js"></script>
 </body>
 </html>

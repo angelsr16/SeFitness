@@ -11,6 +11,7 @@ $(document).ready(function(){
     var routineForm = $("#routine_form")[0];
     var newExerciseForm = $("#exercise_form")[0];
     var editExerciseForm = $("#exercise_form_edit")[0];
+    var editRoutineForm = $("#routine_edit_form")[0];
 
     btnEditExercise = $("#btnCreateExercise");
     btnEditExercise.click(function(e){
@@ -37,6 +38,18 @@ $(document).ready(function(){
         routineForm.classList.add('was-validated');
     });
 
+    btnEditRoutine = $("#btnEditRoutine");
+    btnEditRoutine.click(function(e){
+        var isValid = editRoutineForm.checkValidity();
+        if (!isValid) {
+            e.preventDefault();
+            e.stopPropagation();
+        }else{
+            editFirebaseRoutine();
+        }
+        editRoutineForm.classList.add('was-validated');
+    });
+
     btnCreateExercise = $("#btnCreateExercise");
     btnCreateExercise.click(function(e){
         var isValid = newExerciseForm.checkValidity();
@@ -45,7 +58,6 @@ $(document).ready(function(){
             e.stopPropagation();
         }else{
             createFirebaseExercise(db);
-            //hideAndShow('#create_exercise', '#create_routine_panel')
         }
         newExerciseForm.classList.add('was-validated');
     });
@@ -77,6 +89,8 @@ $(document).ready(function(){
 
 });
 
+currentEditRoutineSelected = -1;
+
 currentExerciseSelected = -1;
 currentExerciseForEditSelected = -1;
 
@@ -89,6 +103,9 @@ function removeExerciseFromFirebase(exerciseId){
 
 let exercisesIndexAdded = [];
 let exercisesAdded = [];
+
+let originalExercisesFromRoutine = [];
+
 function removeExercise(id){
     removeComponent(id);
     indexToRemove = exercisesIndexAdded.indexOf(id);
@@ -233,5 +250,69 @@ function editExercise(){
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
     });
+}
+
+function editRoutineSelect(routine){
+    if(routine.data().Usuarios.length != 0){
+        displayAlertPanel("Esta rutina está asignada a un cliente, no puede ser modificada");
+    }else{
+        currentEditRoutineSelected = routine.id
+        hideAndShow('#routines_list', '#edit_routine');
+        $("#form_name_edit").val(routine.data().Nombre);
+        $("#form_type_edit").val(routine.data().Tipo);
+    
+        exercisesIndexAdded = [];
+        exercisesAdded = [];
+        $(`#new_exercises_list`).empty();
+        originalExercisesFromRoutine = routine.data().Ejercicios;
+        // console.log(originalExercisesFromRoutine);
+        routine.data().Ejercicios.forEach((exerciseId) =>{
+            db.collection("exercises").doc(exerciseId).get().then((firebaseExercise) => {
+                if(firebaseExercise.exists){
+                    addExercise(firebaseExercise);
+                }
+            });
+        });
+    }
+}
+
+function editFirebaseRoutine(){
+    exercisesToUntieFromRoutine = originalExercisesFromRoutine.filter(n => !exercisesAdded.includes(n));
+    console.log(exercisesToUntieFromRoutine + " " + currentEditRoutineSelected);
+    exercisesToUntieFromRoutine.forEach((exerciseId) =>{
+        db.collection("exercises").doc(exerciseId).update({
+            Rutinas: firebase.firestore.FieldValue.arrayRemove(currentEditRoutineSelected)
+        })
+        .then(() => {
+            console.log("Document successfully updated!");
+        })
+        .catch((error) => {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+    });
+
+    routineName = getFormValue("#form_name_edit");
+    routineType = $("#form_type_edit option:selected").text();
+    db.collection("routines").doc(currentEditRoutineSelected).update({
+        Nombre: routineName,
+        Tipo: routineType,
+        Ejercicios: exercisesAdded
+    })
+    .then(() => {
+        
+        console.log("Rutina editada correctamente");
+        exercisesAdded.forEach(exerciseId => {
+            db.collection("exercises").doc(exerciseId).update({
+                Rutinas: firebase.firestore.FieldValue.arrayUnion(currentEditRoutineSelected)
+            })
+        });
+        location.reload();
+    })
+    .catch((error) => {
+        console.error("Error updating document: ", error);
+    });
+
+    
 }
 
