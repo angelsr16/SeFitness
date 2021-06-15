@@ -43,8 +43,9 @@ $(document).ready(function(){
                                 location.href = "html/nutriologo/usuarios.html";
                             }else{
                                 firebase.auth().signOut();
-                                console.log("Esta cuenta es de un cliente");
-                                $(".alert").show();
+                                // console.log("Esta cuenta es de un cliente");
+                                // $(".alert").show();
+                                displayAlertPanel("Esta cuenta es de un cliente");
                             }
                         }else{
                             console.log("No se encontró ningun resultado");

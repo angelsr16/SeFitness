@@ -13,7 +13,7 @@ $(document).ready(function(){
     var editExerciseForm = $("#exercise_form_edit")[0];
     var editRoutineForm = $("#routine_edit_form")[0];
 
-    btnEditExercise = $("#btnCreateExercise");
+    btnEditExercise = $("#btnEditExercise");
     btnEditExercise.click(function(e){
         var isValid = editExerciseForm.checkValidity();
         if (!isValid) {
@@ -163,22 +163,38 @@ function createFirebaseExercise(database){
     exerciseIntensity = getFormValue("#form_intensity");
     exerciseCategory = getFormValue("#form_category");
 
-    database.collection("exercises").add({
-        Nombre: exerciseName,
-        Tipo: exerciseType,
-        Repeticiones: exerciseRepetitions,
-        Series: exerciseSeries,
-        Intensidad: exerciseIntensity,
-        Categoria: exerciseCategory,
-        Rutinas: []
-    })
-    .then((docRef) =>{
-        console.log("Ejercicio registrado correctamente: ", docRef);
-        hideAndShow('#create_exercise', '#create_routine_panel');
-    })
-    .catch((error) => {
-        console.error("Error adding document: ", error);
-    });
+    isDataValid = true;
+
+    if(exerciseRepetitions == 0){
+        isDataValid = false;
+        displayAlertPanel("No puede haber 0 repeticiones en una rutina");
+    }else if(exerciseSeries == 0){
+        isDataValid = false;
+        displayAlertPanel("No puede haber 0 series en una rutina");
+    }else{
+        removeAlertPanel();
+    }
+
+    console.log("Válido: " + isDataValid);
+    if(isDataValid){
+        database.collection("exercises").add({
+            Nombre: exerciseName,
+            Tipo: exerciseType,
+            Repeticiones: exerciseRepetitions,
+            Series: exerciseSeries,
+            Intensidad: exerciseIntensity,
+            Categoria: exerciseCategory,
+            Rutinas: []
+        })
+        .then((docRef) =>{
+            console.log("Ejercicio registrado correctamente: ", docRef);
+            hideAndShow('#create_exercise', '#create_routine_panel');
+        })
+        .catch((error) => {
+            console.error("Error adding document: ", error);
+        });
+    }
+
 }
 
 function createVisualExcercise(exercise){

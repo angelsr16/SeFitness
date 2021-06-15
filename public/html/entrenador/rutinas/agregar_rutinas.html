@@ -78,7 +78,7 @@
             <div class="container col-md-5" id="newRoutine_list">
                 <div class="row header-list mb-3"> <h6>Nueva rutina</h6></div>
                 <form id="routine_form" class="needs-validation">
-                    <input id="form_name" type="text" class="form-control" value="" placeholder="Nombre de la rutina" required>
+                    <input maxlength="50" id="form_name" type="text" class="form-control" value="" placeholder="Nombre de la rutina" required>
                     <div class="invalid-feedback">
                         Escriba el nombre de la rutina
                     </div>
@@ -110,7 +110,7 @@
                             <h5>Editar ejercicio: <strong id="edit_nombre_ejercicio"></strong></h5>
                             <div class="col-md-4">
                                 <label class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="form_name_exercise_edit" value="" required>
+                                <input maxlength="30" type="text" class="form-control" id="form_name_exercise_edit" value="" required>
                                 <div class="invalid-feedback">
                                     Escribe un nombre
                                 </div>
@@ -131,7 +131,7 @@
                             <div class="col-md-4">
                                 <label class="form-label">Repeticiones</label>
                                 <div class="input-group has-validation">
-                                    <input type="text" class="form-control" id="form_repetitions_edit" aria-describedby="inputGroupPrepend" required>
+                                    <input maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' type="text" class="form-control" id="form_repetitions_edit" aria-describedby="inputGroupPrepend" required>
                                     
                                   <div class="invalid-feedback">
                                     Escribe el número de repeticiones
@@ -142,7 +142,7 @@
                             <div class="col-md-4">
                                 <label class="form-label">Series</label>
                                 <div class="input-group has-validation">
-                                    <input type="text" class="form-control" id="form_series_edit" aria-describedby="inputGroupPrepend" required>
+                                    <input maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' type="text" class="form-control" id="form_series_edit" aria-describedby="inputGroupPrepend" required>
                                     <div class="invalid-feedback">
                                         Escribe el número de series
                                     </div>
@@ -151,24 +151,24 @@
         
                             <div class="col-md-4">
                               <label class="form-label">Intensidad</label>
-                              <input type="text" class="form-control" id="form_intensity_edit" value="" required>
+                              <input maxlength="30" type="text" class="form-control" id="form_intensity_edit" value="" required>
                               <div class="invalid-feedback">
-                                Elige la intensidad del ejercicio
+                                Escribe la intensidad del ejercicio
                               </div>
                             </div>
 
                             <div class="col-md-4">
                                 <label class="form-label">Categoría</label>
-                                <input type="text" class="form-control" id="form_category_edit" value="" required>
+                                <input maxlength="30" type="text" class="form-control" id="form_category_edit" value="" required>
                                 <div class="invalid-feedback">
-                                    Elige la categoría del ejercicio
+                                    Escribe la categoría del ejercicio
                                 </div>
                             </div>
         
                             <div class="col-12 mt-3">
                                 <div class="row">
                                     <div class="col">
-                                        <button id="btnCreateExercise" type="button" name="button" class="btn my-btn">Editar ejercicio</button>
+                                        <button id="btnEditExercise" type="button" name="button" class="btn my-btn">Editar ejercicio</button>
                                     </div>
                                     <div class="col-md-2">
                                         <button type="button" name="button" class="btn my-btn-cancel" onclick="hideAndShow('#edit_exercise','#create_routine_panel')">Regresar</button>
@@ -191,7 +191,7 @@
                             <h5>Nuevo ejercicio</h5>
                             <div class="col-md-4">
                                 <label class="form-label">Nombre</label>
-                                <input type="text" class="form-control" id="form_name_exercise" value="" required>
+                                <input maxlength="30" type="text" class="form-control" id="form_name_exercise" value="" required>
                                 <div class="invalid-feedback">
                                     Escribe un nombre
                                 </div>
@@ -212,7 +212,7 @@
                             <div class="col-md-4">
                                 <label class="form-label">Repeticiones</label>
                                 <div class="input-group has-validation">
-                                    <input type="text" class="form-control" id="form_repetitions" aria-describedby="inputGroupPrepend" required>
+                                    <input maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' type="text" class="form-control" id="form_repetitions" aria-describedby="inputGroupPrepend" required>
                                     
                                   <div class="invalid-feedback">
                                     Escribe el número de repeticiones
@@ -223,7 +223,7 @@
                             <div class="col-md-4">
                                 <label class="form-label">Series</label>
                                 <div class="input-group has-validation">
-                                    <input type="text" class="form-control" id="form_series" aria-describedby="inputGroupPrepend" required>
+                                    <input maxlength="2" onkeypress='return event.charCode >= 48 && event.charCode <= 57' type="text" class="form-control" id="form_series" aria-describedby="inputGroupPrepend" required>
                                     <div class="invalid-feedback">
                                         Escribe el número de series
                                     </div>
@@ -232,17 +232,17 @@
         
                             <div class="col-md-4">
                               <label class="form-label">Intensidad</label>
-                              <input type="text" class="form-control" id="form_intensity" value="" required>
+                              <input maxlength="30" type="text" class="form-control" id="form_intensity" value="" required>
                               <div class="invalid-feedback">
-                                Elige la intensidad del ejercicio
+                                Escribe la intensidad del ejercicio
                               </div>
                             </div>
 
                             <div class="col-md-4">
                                 <label class="form-label">Categoría</label>
-                                <input type="text" class="form-control" id="form_category" value="" required>
+                                <input maxlength="30" type="text" class="form-control" id="form_category" value="" required>
                                 <div class="invalid-feedback">
-                                    Elige la categoría del ejercicio
+                                    Escribe la categoría del ejercicio
                                 </div>
                             </div>
         

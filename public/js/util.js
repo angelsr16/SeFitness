@@ -84,18 +84,22 @@ function displayFirebaseAuthError(errorCode, errorPanelId){
         case "auth/weak-password":
             errorMessage = "La contraseña debe contener al menos 6 caracteres";
             break;
+        case "auth/user-not-found":
+            errorMessage = "El correo no está asociada a ninguna cuenta";
+            break;
         default:
             errorMessage = "Hubo un error con el inicio de sesión, intente de nuevo";
     }
-    $(errorPanelId)
-    .empty()
-    .append(
-        "<div class='alert alert-warning alert-dismissible show mt-3' role='alert' style='display: none;'> " +
-            "<strong>Error </strong>" + errorMessage +
-            " <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>" +
-        "</div>"
-    );
-    $(".alert").show();
+    displayAlertPanel(errorMessage);
+    // $(errorPanelId)
+    // .empty()
+    // .append(
+    //     "<div class='alert alert-warning alert-dismissible show mt-3' role='alert' style='display: none;'> " +
+    //         "<strong>Error </strong>" + errorMessage +
+    //         " <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>" +
+    //     "</div>"
+    // );
+    // $(".alert").show();
     console.log(errorMessage + ":" + errorCode);
 }
 

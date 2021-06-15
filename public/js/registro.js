@@ -46,38 +46,42 @@ $(document).ready(function(){
         _password = getFormValue("#form_password");
         _confirmPassword = getFormValue("#form_password_2");
 
-        var db = firebase.firestore();
+        if(_password != _confirmPassword){
+            displayAlertPanel("Las contraseñas no coinciden");
+        }else{
+            removeAlertPanel();
+            var db = firebase.firestore();
 
         firebase.auth().createUserWithEmailAndPassword(_email, _password)
             .then((userCredential) => {
-                //Signed in
-                var user = userCredential.user;
-                db.collection("users").doc(user.uid).set({
-                    name: _name,
-                    genre: _genre,
-                    email: _email,
-                    birthDate: _birthDate,
-                    role: _role,
-                    uid: user.uid
-                })
-                .then(() => {
-                    //console.log("Document written with ID: ", docRef.id);
-                    //alert("Registro realizado correctamente");
-                    location.href = 'index.html';
-                    /*if(_role === "Entrenador") location.href = 'html/entrenador/citas/citas.html';
-                    else location.href = 'html/nutriologo/citas/citas.html';*/
-                })
+                    //Signed in
+                    var user = userCredential.user;
+                    db.collection("users").doc(user.uid).set({
+                        name: _name,
+                        genre: _genre,
+                        email: _email,
+                        birthDate: _birthDate,
+                        role: _role,
+                        uid: user.uid
+                    })
+                    .then(() => {
+                        //console.log("Document written with ID: ", docRef.id);
+                        //alert("Registro realizado correctamente");
+                        location.href = 'index.html';
+                        /*if(_role === "Entrenador") location.href = 'html/entrenador/citas/citas.html';
+                        else location.href = 'html/nutriologo/citas/citas.html';*/
+                    })
+                    .catch((error) => {
+                        console.error("Error adding document: ", error);
+                    });
+            })
                 .catch((error) => {
-                    console.error("Error adding document: ", error);
-                });
-        })
-            .catch((error) => {
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log("Holi");
-                displayFirebaseAuthError(errorCode, '#alerts_panel');
-                //alert(errorCode + " " + errorMessage);
-        });
+                    var errorCode = error.code;
+                    var errorMessage = error.message;
+                    displayFirebaseAuthError(errorCode, '#alerts_panel');
+                    //alert(errorCode + " " + errorMessage);
+            });
+        }
     }
 });
 
