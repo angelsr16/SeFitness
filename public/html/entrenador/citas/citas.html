@@ -84,7 +84,7 @@
                     </select>
                     
                 </div>
-                <div id="selected_user">
+                <div class="selected_user">
                 </div>
                 <div class="d-flex justify-content-center mt-3 login_container">
                     <button onclick="editFirebaseAppointment()" type="button" name="button" class="btn login_btn">Editar</button>
@@ -94,7 +94,7 @@
     </div>
     
     <div class="container mt-5" id="profile_register" style="display:none;">
-        <h5 class="text-center" id="selected_user"></h5>
+        <h5 class="text-center selected_user"></h5>
         <div class="d-flex justify-content-center">
             <div class="profile-register">
                 <form id="record_progress_form" class="row g-3 needs-validation" novalidate style="color:white;">
@@ -302,7 +302,7 @@
 
                     <div class="col-md-12">
                       <label class="form-label">Objetivos</label>
-                      <textarea class="form-control" id="objetivos_form" rows="2"></textarea>
+                      <textarea readonly class="form-control" id="objetivos_form" rows="2"></textarea>
                       <div class="invalid-feedback">
                         
                       </div>
@@ -310,7 +310,7 @@
                     
                     <div class="col-md-12">
                       <label class="form-label">Padecimientos</label>
-                      <textarea class="form-control" id="padecimientos_form" rows="2"></textarea>
+                      <textarea readonly class="form-control" id="padecimientos_form" rows="2"></textarea>
                       <div class="invalid-feedback">
                         
                       </div>

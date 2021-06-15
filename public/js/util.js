@@ -91,15 +91,6 @@ function displayFirebaseAuthError(errorCode, errorPanelId){
             errorMessage = "Hubo un error con el inicio de sesión, intente de nuevo";
     }
     displayAlertPanel(errorMessage);
-    // $(errorPanelId)
-    // .empty()
-    // .append(
-    //     "<div class='alert alert-warning alert-dismissible show mt-3' role='alert' style='display: none;'> " +
-    //         "<strong>Error </strong>" + errorMessage +
-    //         " <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>" +
-    //     "</div>"
-    // );
-    // $(".alert").show();
     console.log(errorMessage + ":" + errorCode);
 }
 

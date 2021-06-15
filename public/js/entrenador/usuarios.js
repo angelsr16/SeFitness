@@ -99,7 +99,7 @@ function showUnsubscribeRequests(){
     $("#assigned_routine_section").hide();
     $("#estatus_section").hide();
     $("#motivos_section").show();
-    db.collection("solicitudes").get().then((querySnapshot) =>{
+    db.collection("solicitudes").where("estado", "==", "Pendiente").get().then((querySnapshot) =>{
         $("#users_firebase_list").empty();
         querySnapshot.forEach((solicitud) => {
             db.collection("users").doc(solicitud.id).get().then((user) =>{
@@ -114,7 +114,7 @@ function showUnsubscribeRequests(){
                                 `</div>` +
                             `</div>` +
                             `<div class='col-md-2'>` +
-                                `<button onclick="unsubscribe(\`${user.id}\`)" type="button" name="button" class="btn my-btn-cancel">Dar de baja</button>` +
+                                `<button onclick="unsubscribe(\`${user.id}\`, \`${solicitud.id}\`)" type="button" name="button" class="btn my-btn-cancel">Dar de baja</button>` +
                             `</div>` +    
                         `</div>`);
                 }
@@ -123,12 +123,15 @@ function showUnsubscribeRequests(){
     });
 }
 
-function unsubscribe(userId){
+function unsubscribe(userId, solicitudId){
     db.collection("users").doc(userId).update({
         status: "Baja",
         solicitudBaja: false
     })
     .then(() => {
+        db.collection("solicitudes").doc(solicitudId).update({
+            estado: "Baja"
+        });
         $("#assigned_routine_section").show();
         $("#estatus_section").show();
         $("#motivos_section").hide();

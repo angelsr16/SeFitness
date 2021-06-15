@@ -37,11 +37,16 @@ function populateAppointmentsList(){
                                     <h6 class="col-md-3">${usuario.data().name}</h6>
                                     <h6 class="col-md-2">${appointment.data().fecha}</h6>
                                     <h6 class="col-md-2">${appointment.data().hora} hrs</h6>
-                                    <h6 class="col pointer" onclick="showProgressRecordForm(\`${usuario.id}\`,\`${usuario.data().name}\`,\`${appointment.id}\`)">Registrar avances</h6>  
+                                    <h6 class="col pointer" id="${appointment.id}_showProgressForm">Registrar avances</h6>  
                                     <h6 class="col pointer" id="${appointment.id}_edit">Modificar</h6>
                                     <h6 onclick="selectAppointmentToCancel(\`${appointment.id}\`)" class="col text-danger pointer"><strong>Cancelar cita</strong><i id='${appointment.id}_lateAppointment' class="col bi bi-stopwatch-fill" style="visibility: hidden;"></i></h6>
                                 </div>`
                             );
+                            $(`#${appointment.id}_showProgressForm`).on('click', function(){
+                                showProgressRecordForm(usuario, appointment.id);
+                            });
+                            
+
                             $(`#${appointment.id}_edit`).on('click', function(){
                                 editAppointment(appointment, usuario);
                             });
@@ -152,12 +157,15 @@ function populateLateAppointmentsList(){
 userSelected = -1;
 appointmentIdSelected = -1;
 
-function showProgressRecordForm(userId, userName, appointmentId){
-    userSelected = userId;
+function showProgressRecordForm(user, appointmentId){
+    console.log("Holi");
+    userSelected = user.id;
     appointmentIdSelected = appointmentId;
     hideAndShow('#dates_list', '#profile_register');
-    console.log("Holi: " + userName);
-    $("#selected_user").empty().append(`Usuario: ` + userName);
+    $(".selected_user").empty().append(`Usuario: ` + user.data().name);
+
+    $("#objetivos_form").val(user.data().objetivos);
+    $("#padecimientos_form").val(user.data().ailments);
 }
 
 function recordUserProgress(userSelected){
