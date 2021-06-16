@@ -24,6 +24,15 @@ $(document).ready(function(){
         filterByName(search);
     });
 
+    $('#progress_date').change(function () {
+        selectedDate = $('#progress_date').val();
+        var date = new Date(selectedDate);
+        console.log(date.getTime());
+        var newDate = new Date(date.getTime() - (19 * 3600000) + 86400000).getTime();
+        console.log(newDate);
+        viewUserProgressFilter(selectedUserId, selectedUserName, newDate);
+    });
+
 });
 
 userComponentIds = [];
@@ -152,7 +161,56 @@ function unsubscribe(userId, solicitudId){
     });
 }
 
+function viewUserProgressFilter(userId, userName, fechaFiltro){
+    hideAndShow(`#users_list`, `#user_progress`);
+    $("#username_progress").empty().append("Usuario: " + userName);
+    console.log(fechaFiltro);
+    db.collection("users").doc(userId).collection("progress").where("fecha", ">=", fechaFiltro).orderBy("fecha").onSnapshot((querySnapshot) =>{
+        $("#appointments_list").empty();
+        console.log("Filtrando");
+        querySnapshot.forEach((progress) =>{
+            console.log("Filtrando weep");
+            $("#appointments_list").append(
+                `<div class="row list-row text-center" id="${progress.id}">
+                    <div class="row">
+                        <h6 class="col-md-6">${getFormattedDate(progress.data().fecha)}</h6>
+                        <h6 class="col pointer" onclick="showDetails('${progress.id}_info', true)" id="${progress.id}_info_view"><i class="bi bi-eye-fill"></i></h6>
+                        <h6 class="col pointer" onclick="showDetails('${progress.id}_info', false)" id="${progress.id}_info_hide" style="display: none;"><i class="bi bi-eye-slash-fill"></i></h6>
+                    </div>
+                    <div class="row text-start" style="margin-left:2em; display:none;" id="${progress.id}_info">
+                        <p><b>Información general</b></p>
+                        <p>Tipo de cuerpo: ${progress.data().tipoCuerpo} </p>
+                        <p>Peso: ${progress.data().peso}</p>
+                        <p>Estatura: ${progress.data().estatura}</p>
+                        <p>I.M.C: ${progress.data().imc}</p>
+                        <p><b>Medidas</b></p>
+                        <p>Cuello: ${progress.data().cuello}</p>
+                        <p>Brazo izquierdo: ${progress.data().brazoIzquierdo}</p>
+                        <p>Brazo derecho: ${progress.data().brazoDerecho}</p>
+                        <p>Antebrazo izquierdo: ${progress.data().antebrazoIzquierdo}</p>
+                        <p>Antebrazo derecho: ${progress.data().antebrazoDerecho}</p>
+                        <p>Torácico mesoesternal: ${progress.data().toracico}</p>
+                        <p>Abdominal mínimo: ${progress.data().abdominalMinimo}</p>
+                        <p>Periumbilical: ${progress.data().periumbilical}</p>
+                        <p>Glúteo máximo: ${progress.data().gluteoMaximo}</p>
+                        <p>Muslo izquierdo: ${progress.data().musloIzquierdo}</p>
+                        <p>Muslo derecho: ${progress.data().musloDerecho}</p>
+                        <p>Pierna máxima izquierda: ${progress.data().piernaIzquierda}</p>
+                        <p>Pierna máxiam derecha: ${progress.data().piernaDerecha}</p>
+                        <p>Observaciones: ${progress.data().observaciones}</p>
+                    </div>
+                </div>`
+            );
+        });
+    });
+}
+
+selectedUserId = -1;
+selectedUserName = -1;
+
 function viewUserProgress(userId, userName){
+    selectedUserId = userId;
+    selectedUserName = userName;
     hideAndShow(`#users_list`, `#user_progress`);
     $("#username_progress").empty().append("Usuario: " + userName);
     db.collection("users").doc(userId).collection("progress").orderBy("fecha").onSnapshot((querySnapshot) =>{

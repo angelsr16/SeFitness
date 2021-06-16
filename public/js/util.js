@@ -154,8 +154,7 @@ function getFormattedDate(milliseconds){
       ]
     date = new Date(milliseconds);
     const monthIndex = date.getMonth()
-    const monthName = months[monthIndex]
-    console.log(date.getDate()); 
+    const monthName = months[monthIndex];
     sDay = (date.getDate() < 10) ? `0${date.getDate()}` : date.getDate().toString();
     return `${sDay}/${monthName}/${date.getFullYear()}`;
     
