@@ -230,6 +230,25 @@ function createVisualExcercise(exercise){
         });
 }
 
+function createVisualExerciseForEditRoutine(exercise){
+    $(`#exercises_firebase_list_edit`).append(`<div class='row list-row' id='${exercise.id}'> ` +
+            `<h6 class='col-md-10 btn-select' id='${exercise.id}_select' >${exercise.data().Nombre}</h6>` +
+            
+            `<div id='${exercise.id}_details'>` +
+                `<div class='row mt-2'>` +
+                    `<div><p>Tipo de ejercicio: ${exercise.data().Tipo} </p></div>` +
+                    `<div><p>Repeticiones: ${exercise.data().Repeticiones}</p></div>` +
+                    `<div><p>Series: ${exercise.data().Series}</p></div>` +
+                    `<div><p>Intensidad: ${exercise.data().Intensidad}</p></div>` +
+                    `<div><p>Categoría: ${exercise.data().Categoria}</p></div>` +
+                `</div>` +
+            `</div>` +
+        `</div>`);
+        $(`#${exercise.id}_select`).on('click', function(){
+            addExercise(exercise);
+        });
+}
+
 function editFirebaseExercise(exercise){
     hideAndShow('#create_routine_panel','#edit_exercise');
     $("#edit_nombre_ejercicio").empty().append(exercise.data().Nombre);
@@ -276,7 +295,15 @@ function editRoutineSelect(routine){
         hideAndShow('#routines_list', '#edit_routine');
         $("#form_name_edit").val(routine.data().Nombre);
         $("#form_type_edit").val(routine.data().Tipo);
-    
+
+        //Create exercises list from firebase
+        db.collection(`exercises`).onSnapshot((querySnapshot) => {
+            $(`#exercises_firebase_list_edit`).empty();
+            querySnapshot.forEach((doc) => {
+                createVisualExerciseForEditRoutine(doc);
+            });
+        });
+        
         exercisesIndexAdded = [];
         exercisesAdded = [];
         $(`#new_exercises_list`).empty();
@@ -293,42 +320,43 @@ function editRoutineSelect(routine){
 }
 
 function editFirebaseRoutine(){
-    exercisesToUntieFromRoutine = originalExercisesFromRoutine.filter(n => !exercisesAdded.includes(n));
-    console.log(exercisesToUntieFromRoutine + " " + currentEditRoutineSelected);
-    exercisesToUntieFromRoutine.forEach((exerciseId) =>{
-        db.collection("exercises").doc(exerciseId).update({
-            Rutinas: firebase.firestore.FieldValue.arrayRemove(currentEditRoutineSelected)
+    if(exercisesAdded.length > 0){
+        exercisesToUntieFromRoutine = originalExercisesFromRoutine.filter(n => !exercisesAdded.includes(n));
+        console.log(exercisesToUntieFromRoutine + " " + currentEditRoutineSelected);
+        exercisesToUntieFromRoutine.forEach((exerciseId) =>{
+            db.collection("exercises").doc(exerciseId).update({
+                Rutinas: firebase.firestore.FieldValue.arrayRemove(currentEditRoutineSelected)
+            })
+            .then(() => {
+                console.log("Document successfully updated!");
+            })
+            .catch((error) => {
+                // The document probably doesn't exist.
+                console.error("Error updating document: ", error);
+            });
+        });
+
+        routineName = getFormValue("#form_name_edit");
+        routineType = $("#form_type_edit option:selected").text();
+        db.collection("routines").doc(currentEditRoutineSelected).update({
+            Nombre: routineName,
+            Tipo: routineType,
+            Ejercicios: exercisesAdded
         })
         .then(() => {
-            console.log("Document successfully updated!");
+            
+            console.log("Rutina editada correctamente");
+            exercisesAdded.forEach(exerciseId => {
+                db.collection("exercises").doc(exerciseId).update({
+                    Rutinas: firebase.firestore.FieldValue.arrayUnion(currentEditRoutineSelected)
+                })
+            });
+            location.reload();
         })
         .catch((error) => {
-            // The document probably doesn't exist.
             console.error("Error updating document: ", error);
         });
-    });
-
-    routineName = getFormValue("#form_name_edit");
-    routineType = $("#form_type_edit option:selected").text();
-    db.collection("routines").doc(currentEditRoutineSelected).update({
-        Nombre: routineName,
-        Tipo: routineType,
-        Ejercicios: exercisesAdded
-    })
-    .then(() => {
-        
-        console.log("Rutina editada correctamente");
-        exercisesAdded.forEach(exerciseId => {
-            db.collection("exercises").doc(exerciseId).update({
-                Rutinas: firebase.firestore.FieldValue.arrayUnion(currentEditRoutineSelected)
-            })
-        });
-        location.reload();
-    })
-    .catch((error) => {
-        console.error("Error updating document: ", error);
-    });
-
-    
+    }else{
+        displayAlertPanel("¡Agrega por lo menos un ejercicio a la rutina!")
+    }
 }
-

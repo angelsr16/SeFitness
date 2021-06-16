@@ -17,6 +17,26 @@ function filterExerciseTypes(type){
     }
 }
 
+function filterExerciseTypesEditRoutine(type){
+    console.log("Preubalfkn");
+    if(type == 'All'){
+        //Normal
+        db.collection(`exercises`).onSnapshot((querySnapshot) => {
+            $(`#exercises_firebase_list_edit`).empty();
+            querySnapshot.forEach((doc) => {
+                createVisualExerciseForEditRoutine(doc);
+            });
+        });
+    }else{
+        db.collection(`exercises`).where("Tipo", "==", type).onSnapshot((querySnapshot) => {
+            $(`#exercises_firebase_list_edit`).empty();
+            querySnapshot.forEach((doc) => {
+                createVisualExerciseForEditRoutine(doc);
+            });
+        });
+    }
+}
+
 function filterRoutineTypes(type){
     if(type == "All"){
         //Normal

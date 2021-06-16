@@ -5,7 +5,7 @@ function hideAndShow(idPanel1, idPanel2, animationSpeed){
     panel1.hide();
 }
 function showDetails(id, show){
-    idExercise = "#" + id.trim();
+    idExercise = "#" + id;
     idBtnShow = idExercise + "_view";
     idBtnHide = idExercise + "_hide";
 
@@ -19,6 +19,8 @@ function showDetails(id, show){
         $(idBtnHide).show();
 
         $(idExercise).show("fast");
+
+        $(idExercise).attr('style','display:block;')
     }else{
         $(idBtnShow).show();
         $(idBtnHide).hide();

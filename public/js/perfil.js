@@ -12,7 +12,26 @@ $(document).ready(function(){
         }
         form.classList.add('was-validated');
     });
+
+    limitDateInput();
 });
+
+function limitDateInput(){
+    var dtToday = new Date();
+    dtToday.setMilliseconds(dtToday.getMilliseconds() - 568025136000);
+
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+
+    var maxDate = year + '-' + month + '-' + day;    
+    $('#form_birth_date').attr('max', maxDate);
+}
 
 function editProfile(){
     nombre = getFormValue("#form_name");
