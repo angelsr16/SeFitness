@@ -64,6 +64,8 @@
                 </div>
                 <div class="col-md-2">
                     <button id="btn_dar_baja" onclick="showUnsubscribeRequests()" type="button" name="button" class="btn my-btn-cancel">Solicitudes de baja</button>
+                    <button style="display: none;" id="btn_regresar" onclick="createUsers()" type="button" name="button" class="btn my-btn-cancel">Regresar</button>
+                    
                 </div>
             </div>
             
@@ -154,12 +156,12 @@
             </div>
             <!--<h6 class="text-center">Tipos de rutinas</h6>-->
             <ol class="filters">
-                <li onclick="filterRoutineTypes('All')"> <label for="tipo1">Todos</label> </li>
-                <li onclick="filterRoutineTypes('Full body')"> <label for="tipo2">Full body</label> </li>
-                <li onclick="filterRoutineTypes('Push/Pull')"> <label for="tipo3">Push/Pull</label> </li>
-                <li onclick="filterRoutineTypes('Upper/Lower')"> <label for="tipo4">Upper/Lower</label> </li>
-                <li onclick="filterRoutineTypes('Push/Pull/Legs')"> <label for="tipo5">Push/Pull/Legs</label> </li>
-                <li onclick="filterRoutineTypes('Weider')"> <label for="tipo6">Weider</label> </li>
+                <li onclick="filterRoutineTypesAssign('All')"> <label for="tipo1">Todos</label> </li>
+                <li onclick="filterRoutineTypesAssign('Full body')"> <label for="tipo2">Full body</label> </li>
+                <li onclick="filterRoutineTypesAssign('Push/Pull')"> <label for="tipo3">Push/Pull</label> </li>
+                <li onclick="filterRoutineTypesAssign('Upper/Lower')"> <label for="tipo4">Upper/Lower</label> </li>
+                <li onclick="filterRoutineTypesAssign('Push/Pull/Legs')"> <label for="tipo5">Push/Pull/Legs</label> </li>
+                <li onclick="filterRoutineTypesAssign('Weider')"> <label for="tipo6">Weider</label> </li>
             </ol>
 
             

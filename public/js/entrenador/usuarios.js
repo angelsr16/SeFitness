@@ -6,7 +6,12 @@ $(document).ready(function(){
         if(isObservationsFormValid(e)){
             assignRoutine();
         }
-    })
+    });
+
+    // $("#btn_regresar").click(function(e){
+    //     hideAndShow('#observations_form','#routines_list');
+    //     ("#btn")
+    // });
 
     $("#user_search_bar").on('input', function(){
         search = $("#user_search_bar").val();
@@ -38,7 +43,8 @@ function createUsers(nombre){
     $("#assigned_routine_section").show();
     $("#estatus_section").show();
     $("#motivos_section").hide();
-    
+    $("#btn_dar_baja").show();
+    $("#btn_regresar").hide();
     db.collection(`users`).where(`role`, `==`, `Cliente`).onSnapshot((querySnapshot) => {
         $(`#users_firebase_list`).empty();
         querySnapshot.forEach((user) => {
@@ -95,6 +101,7 @@ function createVisualUsers(user, routineElement, solicitudBaja){
 }
 
 function showUnsubscribeRequests(){
+    $("#btn_regresar").show();
     $("#btn_dar_baja").hide();
     $("#assigned_routine_section").hide();
     $("#estatus_section").hide();
@@ -136,6 +143,7 @@ function unsubscribe(userId, solicitudId){
         $("#estatus_section").show();
         $("#motivos_section").hide();
         $("#btn_dar_baja").show();
+        $("#btn_regresar").hide();
         createUsers();
     })
     .catch((error) => {

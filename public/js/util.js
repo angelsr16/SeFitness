@@ -62,6 +62,18 @@ function displayAlertPanel(msg){
     $(".alert").show();
 }
 
+function displaySuccessPanel(msg){
+    $("#succesful_panel")
+    .empty()
+    .append(
+        "<div class='alert alert-warning alert-dismissible show mt-3' role='alert' style='display: none;'> " +
+            "<strong>¡Éxito! </strong>" + msg +
+            " <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button>" +
+        "</div>"
+    );
+    $(".alert").show();
+}
+
 function removeAlertPanel(){
     $("#alerts_panel").empty();
 }
@@ -181,6 +193,8 @@ function limitDatePicker(){
     var minDate = year + '-' + month + '-' + day;   
 
 }
+
+
 
 
 
