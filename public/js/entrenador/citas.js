@@ -13,7 +13,8 @@ $(document).ready(function(){
             e.preventDefault();
             e.stopPropagation();
         }else{
-            recordUserProgress(userSelected);
+            // recordUserProgress(userSelected);
+            showModal('#finishAppointmentModal',true);
         }
         recordProgressForm.classList.add('was-validated');
     });
@@ -168,6 +169,21 @@ function showProgressRecordForm(user, appointmentId){
     $("#padecimientos_form").val(user.data().ailments);
 }
 
+function showAssignRoutinePanel(){
+    if(userSelected != -1){
+        showModal('#finishAppointmentModal',false);
+        recordUserProgress(userSelected);
+        selectUserFromAppointment(userSelected);
+    }
+}
+
+function saveInfo(){
+    if(userSelected != -1){
+        showModal('#finishAppointmentModal',false);
+        recordUserProgress(userSelected);
+    }
+}
+
 function recordUserProgress(userSelected){
     _tipoCuerpo = getFormValue("#body_type_form");
     _peso = getFormValue("#weight_form");
@@ -218,10 +234,10 @@ function recordUserProgress(userSelected){
         db.collection("users").doc(userSelected).collection("citas").doc(appointmentIdSelected).update({
             estado: "Realizada"
         });
+        hideAndShow("#profile_register","#dates_list");
     }).catch((error) =>{
 
     });
-    hideAndShow('#profile_register', '#dates_list');
 }
 
 appointmentToCancelSelected = -1;

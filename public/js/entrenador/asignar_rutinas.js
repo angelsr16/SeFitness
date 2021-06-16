@@ -11,6 +11,12 @@ $(document).ready(function(){
     observationsForm = $("#observations_form");
     routinesList.hide();
     observationsForm.hide();
+
+    $("#btn_assign_routine").click(function (e){
+        if(isObservationsFormValid(e)){
+            assignRoutine();
+        }
+    });
 });
 
 
@@ -70,6 +76,24 @@ function selectUser(userId, userName, userailments){
     hideAndShow('#users_list', '#routines_list');
     $("#routine_info").hide();
     createVisualRoutines();
+}
+
+function selectUserFromAppointment(userId){
+    db.collection("users").doc(userId).get().then((user) =>{
+        if(user.exists){
+            userSelected = userId;
+            console.log("User selected: " + userSelected);
+            userName = user.data().name;
+            userailments = user.data().ailments;
+            $(`#user_to_asign`).empty().append(`Usuario: ` + userName);
+            $("#user_to_asign_observations").empty().append("Usuario: " + userName);
+            ailmentsComponent = userailments.replace(/(?:\r\n|\r|\n)/g, '<br>');
+            $("#padecimientos_panel").empty().append(`${ailmentsComponent}`);
+            //console.log(`Usuario seleccionado` + userSelected);
+            hideAndShow('#profile_register', '#routines_list');
+            createVisualRoutines();
+        }
+    });
 }
 
 function createVisualRoutines(){
@@ -211,7 +235,9 @@ function assignRoutine(){
                 });
                 
                 
-                hideAndShow('#observations_form', '#users_list')
+                hideAndShow('#observations_form', '#users_list');
+                hideAndShow('#observations_form', '#dates_list');
+
             })
             .catch((error) => {
                 console.error("Error adding document: ", error);
