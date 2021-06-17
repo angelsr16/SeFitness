@@ -188,6 +188,9 @@ function createFirebaseExercise(database){
         })
         .then((docRef) =>{
             console.log("Ejercicio registrado correctamente: ", docRef);
+
+            clearExerciseForm($("#exercise_form")[0]);
+
             hideAndShow('#create_exercise', '#create_routine_panel');
         })
         .catch((error) => {

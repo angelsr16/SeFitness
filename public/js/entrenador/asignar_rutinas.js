@@ -233,8 +233,7 @@ function assignRoutine(){
                         });
                     }
                 });
-                
-                
+                clearObservationsForm();
                 hideAndShow('#observations_form', '#users_list');
                 hideAndShow('#observations_form', '#dates_list');
 
@@ -261,6 +260,16 @@ function isObservationsFormValid(e){
     }
     form.classList.add('was-validated');
     return isValid;
+}
+
+function clearObservationsForm(){
+    $("#assignment_form")[0].classList.remove('was-validated');
+    $("#observations").val("");
+}
+
+function backForm(){
+    hideAndShow('#observations_form','#routines_list');
+    clearObservationsForm();
 }
 
 

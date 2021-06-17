@@ -195,6 +195,19 @@ function limitDatePicker(){
 
 }
 
+function clearInput(id){
+    $(id).val('');
+}
+
+function clearExerciseForm(form){
+    form.classList.remove('was-validated');
+    clearInput("#form_name_exercise");
+    clearInput("#form_repetitions");
+    clearInput("#form_series");
+    clearInput("#form_intensity");
+    clearInput("#form_category");
+}
+
 
 
 

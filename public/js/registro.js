@@ -1,12 +1,31 @@
 $(document).ready(function(){
+    wasPressed = false;
+
     nextBtn = $("#next_btn");
     registrarBtn = $("#registrar_btn")
     step1 = $("#step-1");
     step2 = $("#step-2");
 
     limitDateInput();
-
+    
     var form = $("#registro_form")[0];
+
+    $("#regresar_step_1").click(function(e){
+        $("#form_password").attr("required", "");
+        $("#form_password_2").attr("required", "");
+        $("#step-1").show();
+        $("#step-2").hide();
+        $("#continue_btn").show();
+        $("#registrar_btn").hide();
+    });
+
+    $("#continue_btn").click(function(e){
+        $("#step-2").show();
+        $("#step-1").hide();
+        $("#continue_btn").hide();
+        $("#registrar_btn").show();
+    });
+
 
     nextBtn.click(function(e){
         var isValid = form.checkValidity();
@@ -14,8 +33,11 @@ $(document).ready(function(){
             e.preventDefault();
             e.stopPropagation();
         }else{
+            $("#next_btn").hide();
             next_step();   
         }
+
+        
         form.classList.add('was-validated');
     });
 
@@ -31,8 +53,8 @@ $(document).ready(function(){
     });
 
     function next_step(){
-        $("#form_password").attr("required", "")
-        $("#form_password_2").attr("required", "")
+        $("#form_password").attr("required", "");
+        $("#form_password_2").attr("required", "");
         step1.hide();
         step2.show();
         nextBtn.hide();
